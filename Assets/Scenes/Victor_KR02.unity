@@ -169,11 +169,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squarePrefab: {fileID: 5923570030290293873, guid: 39fc6b19258dc40bf83dc43691095d88,
     type: 3}
-  gridWidth: 100
-  gridHeight: 100
+  gridWidth: 32
+  gridHeight: 32
   squareSize: 0.05
   onGridUnitSpawnEvent: {fileID: 11400000, guid: 7faf6e1ba3d7342caaff444da406b596,
     type: 2}
+  positionX: 0
+  positionY: 0
+  positionZ: 0
 --- !u!1 &100758343
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,9 +206,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe130a64265408eb9972d0f84ee770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToFinish: 20
+  timeToFinish: 10
+  currentSpeed: 1
   timerText: {fileID: 301618631}
-  compareManager: {fileID: 0}
+  canvasSaver: {fileID: 0}
 --- !u!4 &100758345
 Transform:
   m_ObjectHideFlags: 0
@@ -265,8 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905eff852cd9408c8bd22bdbc8cf2573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridStateManager: {fileID: 0}
-  paintingParser: {fileID: 0}
+  gridStateManager: {fileID: 1755936292}
+  paintingParser: {fileID: 1110419301}
 --- !u!1 &230406211
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +505,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1980, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2603,7 +2607,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
 --- !u!114 &1775123369
 MonoBehaviour:
   m_ObjectHideFlags: 0
