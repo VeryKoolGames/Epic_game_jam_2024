@@ -10,7 +10,6 @@ public class FollowCursor : MonoBehaviour
     private bool isMouseInZone;
     private bool isMouseButtonDown;
     private ColorsEnum currentColor = ColorsEnum.WHITE;
-
     private Color currentPaintColor = Color.white;
     [SerializeField] private OnColorChoiceListener onColorChoiceListener;
 
@@ -21,7 +20,6 @@ public class FollowCursor : MonoBehaviour
     
     public void SetCurrentColor(Color color)
     {
-        Debug.Log("Setting current color to: " + color);
         currentPaintColor = color;
     }
 
@@ -48,7 +46,6 @@ public class FollowCursor : MonoBehaviour
 
     private void PaintSquares(Vector3 position)
     {
-        // Use a small overlap circle to detect multiple squares under the cursor
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, 0.4f);
 
         foreach (Collider2D hitCollider in hitColliders)
