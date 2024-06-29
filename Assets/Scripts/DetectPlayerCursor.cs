@@ -9,7 +9,7 @@ public class DetectPlayerCursor : MonoBehaviour
     void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure the z-coordinate is zero for a 2D game
+        mousePosition.z = 0;
 
         Collider2D zoneCollider = GetComponent<Collider2D>();
 
