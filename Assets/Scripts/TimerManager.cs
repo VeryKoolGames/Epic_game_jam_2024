@@ -6,9 +6,9 @@ using UnityEngine;
 public class TimerManager : MonoBehaviour
 {
     [SerializeField] private float timeToFinish;
+    [SerializeField] private int currentSpeed = 1;
     [SerializeField] private TextMeshProUGUI timerText;
-    public CompareManager compareManager;
-    private int currentSpeed = 1;
+    [SerializeField] private CanvasSaver canvasSaver;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +21,10 @@ public class TimerManager : MonoBehaviour
         if (timeToFinish <= 0)
         {
             timeToFinish = 0;
+            // canvasSaver.SaveCanvasToLeaderboard("Jambon", 1000);
             // Should raise an event to finish game here
             // percentage correct is:
-            Debug.Log(compareManager.GetPercentageCorrect());
+            // Debug.Log(compareManager.GetPercentageCorrect());
             // compareManager.GetPercentageCorrect();
         }
         UpdateTimerUI();
@@ -38,6 +39,6 @@ public class TimerManager : MonoBehaviour
     
     public void AccelerateTimer()
     {
-        currentSpeed = 20;
+        currentSpeed = 60;
     }
 }
