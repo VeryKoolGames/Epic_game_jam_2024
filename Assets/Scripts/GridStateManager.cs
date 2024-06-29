@@ -27,12 +27,11 @@ public class GridStateManager : MonoBehaviour
         return colors;
     }
     
-    public void UpdateNodeColorById(int id, ColorsEnum color, Color colorHex)
+    public void UpdateNodeColorById(int id, Color colorHex)
     {
         GridNode node = gridNodes.Find(x => x.id == id);
         if (node != null)
         {
-            node.color = color;
             node.colorHex = colorHex;
         }
     }
@@ -47,7 +46,6 @@ public class GridStateManager : MonoBehaviour
         foreach (GridNode gridNode in gridNodes)
         {
             gridNode.spriteRenderer.color = Color.white;
-            gridNode.color = ColorsEnum.WHITE;
         }
     }
 }

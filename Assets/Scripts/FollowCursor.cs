@@ -17,6 +17,7 @@ public class FollowCursor : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Texture2D texture;
     private Vector2Int textureSize;
+    private int id;
 
     private void Start()
     {
@@ -24,7 +25,6 @@ public class FollowCursor : MonoBehaviour
 
         if (!texture.isReadable)
         {
-            Debug.LogError("The texture must be readable. Enable 'Read/Write Enabled' in the texture import settings.");
             return;
         }
 
@@ -46,7 +46,6 @@ public class FollowCursor : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // PaintSquares(transform.position);
                 isMouseButtonDown = true;
             }
             
@@ -89,7 +88,7 @@ public class FollowCursor : MonoBehaviour
         Vector2 localPoint;
         if (GetMousePixelPosition(out localPoint))
         {
-            PaintPixels(localPoint, Color.red, 20);
+            PaintPixels(localPoint, currentPaintColor, 20);
         }
     }
     
