@@ -17,6 +17,16 @@ public class GridStateManager : MonoBehaviour
         gridNodes.Add(gridNode);
     }
     
+    public Color[] GetGridColors()
+    {
+        Color[] colors = new Color[gridNodes.Count];
+        for (int i = 0; i < gridNodes.Count; i++)
+        {
+            colors[i] = gridNodes[i].colorHex;
+        }
+        return colors;
+    }
+    
     public void UpdateNodeColorById(int id, ColorsEnum color, Color colorHex)
     {
         GridNode node = gridNodes.Find(x => x.id == id);
