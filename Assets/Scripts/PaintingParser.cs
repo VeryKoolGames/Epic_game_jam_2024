@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
@@ -11,8 +10,16 @@ public class PaintingParser : MonoBehaviour
     private Color[] colors;
     public Color redColor;
     public Color blueColor;
-    public Color greenColor;
+    public Color yellowColor; // Changed from green to yellow
     [SerializeField] private OnColorParsedEvent onColorParsedEvent;
+
+    private float closestDistanceToRed = float.MaxValue;
+    private float closestDistanceToBlue = float.MaxValue;
+    private float closestDistanceToYellow = float.MaxValue;
+
+    private Color closestToRedColor = Color.black;
+    private Color closestToBlueColor = Color.black;
+    private Color closestToYellowColor = Color.black;
 
     void Start()
     {
@@ -26,7 +33,7 @@ public class PaintingParser : MonoBehaviour
     void ParseSpriteColors()
     {
         Texture2D texture = sprite.texture;
-        
+
         colors = texture.GetPixels((int)sprite.textureRect.x,
             (int)sprite.textureRect.y,
             (int)sprite.textureRect.width,
@@ -34,31 +41,61 @@ public class PaintingParser : MonoBehaviour
 
         foreach (Color color in colors)
         {
-            GetHighestRValue(color);
+            GetClosestColor(color);
         }
+
+        redColor = closestToRedColor;
+        blueColor = closestToBlueColor;
+        yellowColor = closestToYellowColor;
+
+        Debug.Log("Red: " + redColor);
+        Debug.Log("Yellow: " + yellowColor);
+        Debug.Log("Blue: " + blueColor);
+
         onColorParsedEvent.Raise(redColor);
-        onColorParsedEvent.Raise(greenColor);
+        onColorParsedEvent.Raise(yellowColor);
         onColorParsedEvent.Raise(blueColor);
     }
-    
-    private void GetHighestRValue(Color newColor)
+
+    private void GetClosestColor(Color newColor)
     {
-        if (newColor.r > redColor.r)
+        if (newColor == Color.white)
         {
-            redColor = newColor;
+            return;
         }
-        else if (newColor.g > greenColor.g)
+
+        float distanceToRed = ColorDistance(newColor, Color.red);
+        if (distanceToRed < closestDistanceToRed)
         {
-            greenColor = newColor;
+            closestDistanceToRed = distanceToRed;
+            closestToRedColor = newColor;
         }
-        else if (newColor.b > blueColor.b)
+
+        float distanceToBlue = ColorDistance(newColor, Color.blue);
+        if (distanceToBlue < closestDistanceToBlue)
         {
-            blueColor = newColor;
+            closestDistanceToBlue = distanceToBlue;
+            closestToBlueColor = newColor;
         }
+
+        float distanceToYellow = ColorDistance(newColor, new Color(1.0f, 1.0f, 0.0f));
+        if (distanceToYellow < closestDistanceToYellow)
+        {
+            closestDistanceToYellow = distanceToYellow;
+            closestToYellowColor = newColor;
+        }
+    }
+
+    private float ColorDistance(Color c1, Color c2)
+    {
+        float rDiff = c1.r - c2.r;
+        float gDiff = c1.g - c2.g;
+        float bDiff = c1.b - c2.b;
+        return Mathf.Sqrt(rDiff * rDiff + gDiff * gDiff + bDiff * bDiff);
     }
 
     public Color[] GetPaintColors()
     {
-        return (colors);
+        return colors;
     }
 }

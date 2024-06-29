@@ -10,6 +10,7 @@ public class FmodEvents : MonoBehaviour
     public EventReference eraserSound;
     public EventReference doubleClickSound;
     public EventReference smallBrushSound;
+    public EventReference musicOne;
 
     private void Awake()
     {
