@@ -8,7 +8,6 @@ public class TimerManager : MonoBehaviour
     [SerializeField] private float timeToFinish;
     [SerializeField] private int currentSpeed = 1;
     [SerializeField] private TextMeshProUGUI timerText;
-
     [SerializeField] private CanvasSaver canvasSaver;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +23,9 @@ public class TimerManager : MonoBehaviour
             timeToFinish = 0;
             // canvasSaver.SaveCanvasToLeaderboard("Jambon", 1000);
             // Should raise an event to finish game here
+            // percentage correct is:
+            // Debug.Log(compareManager.GetPercentageCorrect());
+            // compareManager.GetPercentageCorrect();
         }
         UpdateTimerUI();
     }
