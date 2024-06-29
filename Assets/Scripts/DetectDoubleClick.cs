@@ -40,6 +40,7 @@ public class DetectDoubleClick : MonoBehaviour
             {
                 if (onDoubleClick != null)
                 {
+                    AudioManager.Instance.PlayOneShot(FmodEvents.Instance.doubleClickSound, transform.position);
                     onDoubleClick.Invoke();
                 }
                 clickCount = 0;

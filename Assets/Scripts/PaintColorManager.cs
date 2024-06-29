@@ -10,7 +10,7 @@ public class PaintColorManager : MonoBehaviour
     [SerializeField] private List<GameObject> colorPickingButtons = new List<GameObject>();
     [SerializeField] private OnColorSpawnedListener onColorSpawnedListener;
      // Start is called before the first frame update
-     private void OnEnable()
+     private void Awake()
      {
          onColorSpawnedListener.Response.AddListener(SetColor);
      }

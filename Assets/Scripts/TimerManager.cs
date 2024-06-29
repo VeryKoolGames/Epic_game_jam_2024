@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimerManager : MonoBehaviour
 {
     [SerializeField] private float timeToFinish;
+    [SerializeField] private FollowCursor follow;
+    private float baseTimeToFinish;
     [SerializeField] private int currentSpeed = 1;
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private CanvasSaver canvasSaver;
+    [SerializeField] private UnityEvent onTimerEnd;
+    // [SerializeField] private CanvasSaver canvasSaver;
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.musicOne, transform.position);
         UpdateTimerUI();
+        baseTimeToFinish = timeToFinish;
     }
 
     void Update()
@@ -20,13 +26,16 @@ public class TimerManager : MonoBehaviour
         timeToFinish -= Time.deltaTime * currentSpeed;
         if (timeToFinish <= 0)
         {
-            timeToFinish = 0;
-            // canvasSaver.SaveCanvasToLeaderboard("Jambon", 1000);
-            // Should raise an event to finish game here
-            // percentage correct is:
-            // Debug.Log(compareManager.GetPercentageCorrect());
-            // compareManager.GetPercentageCorrect();
+            timeToFinish = baseTimeToFinish;
+            currentSpeed = 1;
+            onTimerEnd.Invoke();
         }
+        UpdateTimerUI();
+    }
+    
+    public void ResetTimer()
+    {
+        timeToFinish = baseTimeToFinish;
         UpdateTimerUI();
     }
 

@@ -337,18 +337,6 @@ Transform:
   - {fileID: 2085739508}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &81909471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5988228273340996629, guid: eff66d562b9a041248010e81777a458a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1114433862}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbbb8c9f798e6463c94849e538e85a30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &95833435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1204,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &307656958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4606236350016334953, guid: eff66d562b9a041248010e81777a458a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1114433862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f8219069d6043d08f372c64be481d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &357870099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &552325871
 Animator:
   serializedVersion: 5
@@ -3583,6 +3583,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameScene
       objectReference: {fileID: 0}
+    - target: {fileID: 744549716787685009, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 837280737197959307, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3724,6 +3729,12 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 734214540}
+    - target: {fileID: 4606236350016334953, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: onGridUnitSpawnEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 7faf6e1ba3d7342caaff444da406b596,
+        type: 2}
     - target: {fileID: 5121603767651781110, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: m_text
@@ -5036,6 +5047,84 @@ Transform:
   - {fileID: 1536603618}
   m_Father: {fileID: 45587550}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1336481828
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093512905850521281, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5936155103170693944, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_Name
+      value: GeeTeeAyFive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5936155103170693944, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5936155103170693944, guid: 128c5b36d42154815bd2b932dcfdfe40,
+        type: 3}
+      propertyPath: m_TagString
+      value: GeeTee
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 128c5b36d42154815bd2b932dcfdfe40, type: 3}
 --- !u!1 &1359231556
 GameObject:
   m_ObjectHideFlags: 0
@@ -7754,9 +7843,9 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 81909471}
-        m_TargetAssemblyTypeName: GridStateManager, Assembly-CSharp
-        m_MethodName: ResetGrid
+      - m_Target: {fileID: 307656958}
+        m_TargetAssemblyTypeName: FollowCursor, Assembly-CSharp
+        m_MethodName: ResetTexture
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7823,5 +7912,6 @@ SceneRoots:
   - {fileID: 62869041}
   - {fileID: 1539904913}
   - {fileID: 45587550}
+  - {fileID: 1336481828}
   - {fileID: 1114433862}
   - {fileID: 734214541}
