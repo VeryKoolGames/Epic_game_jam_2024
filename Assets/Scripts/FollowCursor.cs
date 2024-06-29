@@ -24,7 +24,6 @@ public class FollowCursor : MonoBehaviour
 
     private void Awake()
     {
-        smallBrushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.smallBrushSound);
         texture = DuplicateTexture(spriteRenderer.sprite.texture);
         originalPixels = texture.GetPixels(); // Store the original pixels
 
@@ -36,7 +35,12 @@ public class FollowCursor : MonoBehaviour
         spriteRenderer.sprite = Sprite.Create(texture, spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f));
         onColorChoiceListener.Response.AddListener(SetCurrentColor);
     }
-    
+
+    private void Start()
+    {
+        smallBrushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.smallBrushSound);
+    }
+
     public void ResetTexture()
     {
         Debug.Log(texture);
@@ -57,6 +61,7 @@ public class FollowCursor : MonoBehaviour
     
     public void SetCurrentColor(Color color)
     {
+        Debug.Log("Setting color to: " + color);
         hasBlended = false;
         currentPaintColor = color;
     }
@@ -147,7 +152,7 @@ public class FollowCursor : MonoBehaviour
         {
             for (int x = -radius; x <= radius; x++)
             {
-                if (x * x + y * y <= radius * radius) // Check if the pixel is within the circle
+                if (x * x + y * y <= radius * radius)
                 {
                     int pixelX = cx + x;
                     int pixelY = cy + y;
