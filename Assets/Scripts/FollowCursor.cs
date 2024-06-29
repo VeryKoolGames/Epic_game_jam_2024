@@ -14,9 +14,22 @@ public class FollowCursor : MonoBehaviour
     private Color currentPaintColor = Color.white;
     [SerializeField] private OnColorChoiceListener onColorChoiceListener;
     private bool hasBlended;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    private Texture2D texture;
+    private Vector2Int textureSize;
 
     private void Start()
     {
+        texture = DuplicateTexture(spriteRenderer.sprite.texture);
+
+        if (!texture.isReadable)
+        {
+            Debug.LogError("The texture must be readable. Enable 'Read/Write Enabled' in the texture import settings.");
+            return;
+        }
+
+        textureSize = new Vector2Int(texture.width, texture.height);
+        spriteRenderer.sprite = Sprite.Create(texture, spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f));
         onColorChoiceListener.Response.AddListener(SetCurrentColor);
     }
     
@@ -33,6 +46,7 @@ public class FollowCursor : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                // PaintSquares(transform.position);
                 isMouseButtonDown = true;
             }
             
@@ -46,31 +60,83 @@ public class FollowCursor : MonoBehaviour
             PaintSquares(transform.position);
         }
     }
+    
+    private Texture2D DuplicateTexture(Texture2D source)
+    {
+        RenderTexture renderTex = RenderTexture.GetTemporary(
+            source.width,
+            source.height,
+            0,
+            RenderTextureFormat.Default,
+            RenderTextureReadWrite.Linear);
+
+        Graphics.Blit(source, renderTex);
+        RenderTexture previous = RenderTexture.active;
+        RenderTexture.active = renderTex;
+
+        Texture2D readableText = new Texture2D(source.width, source.height);
+        readableText.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
+        readableText.Apply();
+
+        RenderTexture.active = previous;
+        RenderTexture.ReleaseTemporary(renderTex);
+
+        return readableText;
+    }
 
     private void PaintSquares(Vector3 position)
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, 0.4f);
-
-        int n = 0;
-        foreach (Collider2D hitCollider in hitColliders)
+        Vector2 localPoint;
+        if (GetMousePixelPosition(out localPoint))
         {
-            SpriteRenderer squareRenderer = hitCollider.GetComponent<SpriteRenderer>();
-            if (squareRenderer != null && hitCollider != this.GetComponent<Collider2D>())
+            PaintPixels(localPoint, Color.red, 20);
+        }
+    }
+    
+    private bool GetMousePixelPosition(out Vector2 pixelPos)
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 localPos = spriteRenderer.transform.InverseTransformPoint(mouseWorldPos);
+
+        Rect spriteRect = spriteRenderer.sprite.rect;
+        Vector2 pivot = spriteRenderer.sprite.pivot;
+
+        float unitsPerPixel = spriteRect.width / spriteRenderer.sprite.bounds.size.x;
+        Vector2 localPixelPos = new Vector2(localPos.x * unitsPerPixel + pivot.x, localPos.y * unitsPerPixel + pivot.y);
+
+        if (localPixelPos.x >= 0 && localPixelPos.x < textureSize.x && localPixelPos.y >= 0 && localPixelPos.y < textureSize.y)
+        {
+            pixelPos = new Vector2(localPixelPos.x, localPixelPos.y);
+            return true;
+        }
+
+        pixelPos = Vector2.zero;
+        return false;
+    }
+
+    private void PaintPixels(Vector2 pixelPos, Color color, int brushSize)
+    {
+        int radius = brushSize;
+        int cx = (int)pixelPos.x;
+        int cy = (int)pixelPos.y;
+
+        for (int y = -radius; y <= radius; y++)
+        {
+            for (int x = -radius; x <= radius; x++)
             {
-                if (!hasBlended)
+                if (x * x + y * y <= radius * radius) // Check if the pixel is within the circle
                 {
-                    squareRenderer.color = BlendColors(currentPaintColor, squareRenderer.color);
-                    currentPaintColor = squareRenderer.color;
+                    int pixelX = cx + x;
+                    int pixelY = cy + y;
+
+                    if (pixelX >= 0 && pixelX < textureSize.x && pixelY >= 0 && pixelY < textureSize.y)
+                    {
+                        texture.SetPixel(pixelX, pixelY, color);
+                    }
                 }
-                else
-                {
-                    squareRenderer.color = currentPaintColor;
-                }
-                gridStateManager.UpdateNodeColorById(hitCollider.gameObject.GetComponent<StoreGridNodeId>().id, currentColor, currentPaintColor);
-                n++;
             }
         }
-        Debug.Log("paintsquares: "+n); // un clic == 245
+        texture.Apply();
     }
     
     private Color BlendColors(Color color1, Color color2)
@@ -92,14 +158,13 @@ public class FollowCursor : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
-        transform.position = Vector3.Lerp(transform.position, mousePos, speed * Time.deltaTime);
+        transform.position = mousePos;
     }
     
     public void SetIsMouseInZone(bool value)
     {
         if (!value)
         {
-            // MoveCursorTowardsCenter();
             isMouseButtonDown = false;
         }
         isMouseInZone = value;
