@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class GridNode
 {
-    public ColorsEnum color;
     public int id;
     public Color colorHex;
     public SpriteRenderer spriteRenderer;
 
-    public GridNode(ColorsEnum color, int id, Color colorHex, SpriteRenderer spriteRenderer)
+    public GridNode( int id, Color colorHex, SpriteRenderer spriteRenderer)
     {
-        this.color = color;
         this.id = id;
         this.colorHex = colorHex;
         this.spriteRenderer = spriteRenderer;
@@ -54,7 +52,7 @@ public class GridManager : MonoBehaviour
                 Vector3 position = new Vector3(x * squareSize + offsetX, y * squareSize + offsetY, positionZ);
                 GameObject newObj = Instantiate(squarePrefab, position, Quaternion.identity);
                 newObj.GetComponent<StoreGridNodeId>().id = id;
-                GridNode gridNode = new GridNode(ColorsEnum.WHITE, id, Color.white,  newObj.GetComponent<SpriteRenderer>());
+                GridNode gridNode = new GridNode(id, Color.white,  newObj.GetComponent<SpriteRenderer>());
                 newObj.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 onGridUnitSpawnEvent.Raise(gridNode);
                 id++;
