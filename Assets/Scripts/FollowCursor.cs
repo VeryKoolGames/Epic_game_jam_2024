@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using DefaultNamespace;
 using DG.Tweening;
 using UnityEngine;
@@ -11,10 +9,22 @@ public class FollowCursor : MonoBehaviour
     [SerializeField] private GridStateManager gridStateManager;
     private bool isMouseInZone;
     private bool isMouseButtonDown;
-    private ColorsEnum currentColor = ColorsEnum.BLUE;
-    // Start is called before the first frame update
+    private ColorsEnum currentColor = ColorsEnum.WHITE;
 
-    // Update is called once per frame
+    private Color currentPaintColor = Color.white;
+    [SerializeField] private OnColorChoiceListener onColorChoiceListener;
+
+    private void Start()
+    {
+        onColorChoiceListener.Response.AddListener(SetCurrentColor);
+    }
+    
+    public void SetCurrentColor(Color color)
+    {
+        Debug.Log("Setting current color to: " + color);
+        currentPaintColor = color;
+    }
+
     void Update()
     {
         if (isMouseInZone)
@@ -47,7 +57,7 @@ public class FollowCursor : MonoBehaviour
             if (squareRenderer != null && hitCollider != this.GetComponent<Collider2D>())
             {
                 gridStateManager.UpdateNodeColorById(hitCollider.gameObject.GetComponent<StoreGridNodeId>().id, currentColor);
-                squareRenderer.color = Color.blue;
+                squareRenderer.color = currentPaintColor;
             }
         }
     }
