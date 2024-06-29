@@ -7,27 +7,33 @@ public class TimerManager : MonoBehaviour
 {
     [SerializeField] private float timeToFinish;
     [SerializeField] private TextMeshProUGUI timerText;
+    private int currentSpeed = 1;
     // Start is called before the first frame update
     void Start()
     {
-        UpdateTimerUI(); // Initial update to set the timer text at the start
+        UpdateTimerUI();
     }
 
     void Update()
     {
-        timeToFinish -= Time.deltaTime;
+        timeToFinish -= Time.deltaTime * currentSpeed;
         if (timeToFinish <= 0)
         {
             timeToFinish = 0;
-            Debug.Log("Timer finished");
+            // Should raise an event to finish game here
         }
-        UpdateTimerUI(); // Update the timer UI every frame
+        UpdateTimerUI();
     }
 
     private void UpdateTimerUI()
     {
         int minutes = Mathf.FloorToInt(timeToFinish / 60);
         int seconds = Mathf.FloorToInt(timeToFinish % 60);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = $"{minutes:00}:{seconds:00}";
+    }
+    
+    public void AccelerateTimer()
+    {
+        currentSpeed = 20;
     }
 }
