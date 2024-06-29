@@ -54,6 +54,7 @@ public class GridManager : MonoBehaviour
                 GameObject newObj = Instantiate(squarePrefab, position, Quaternion.identity);
                 newObj.GetComponent<StoreGridNodeId>().id = id;
                 GridNode gridNode = new GridNode(ColorsEnum.WHITE, id, Color.white,  newObj.GetComponent<SpriteRenderer>());
+                newObj.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 onGridUnitSpawnEvent.Raise(gridNode);
                 id++;
             }

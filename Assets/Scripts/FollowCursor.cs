@@ -28,9 +28,9 @@ public class FollowCursor : MonoBehaviour
 
     void Update()
     {
+        LerpToMouse();
         if (isMouseInZone)
         {
-            LerpToMouse();
             if (Input.GetMouseButtonDown(0))
             {
                 isMouseButtonDown = true;
@@ -56,7 +56,6 @@ public class FollowCursor : MonoBehaviour
             SpriteRenderer squareRenderer = hitCollider.GetComponent<SpriteRenderer>();
             if (squareRenderer != null && hitCollider != this.GetComponent<Collider2D>())
             {
-                // squareRenderer.color = currentPaintColor;
                 if (!hasBlended)
                 {
                     squareRenderer.color = BlendColors(currentPaintColor, squareRenderer.color);
@@ -77,12 +76,11 @@ public class FollowCursor : MonoBehaviour
         {
             return color1;
         }
-        float blendFactor = 0.5f; // You can adjust this factor to control the blending weight
+        float blendFactor = 0.5f;
         float r = Mathf.Lerp(color1.r, color2.r, blendFactor);
         float g = Mathf.Lerp(color1.g, color2.g, blendFactor);
         float b = Mathf.Lerp(color1.b, color2.b, blendFactor);
         Color ret = new Color(r, g, b, 1.0f);
-        Debug.Log(ret.ToHexString());
         hasBlended = true;
         return ret;
     }
@@ -98,7 +96,7 @@ public class FollowCursor : MonoBehaviour
     {
         if (!value)
         {
-            MoveCursorTowardsCenter();
+            // MoveCursorTowardsCenter();
             isMouseButtonDown = false;
         }
         isMouseInZone = value;
