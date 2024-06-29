@@ -11,6 +11,7 @@ public class Palette : MonoBehaviour
     private bool isMouseButtonDown;
     private ColorsEnum currentColor = ColorsEnum.WHITE;
     private Color currentPaintColor = Color.white;
+    private Color lastMix;
     private Color[] selectedColors = new Color[20];
     private int index = 0;
     [SerializeField] private OnColorChoiceListener onColorChoiceListener;
@@ -59,6 +60,7 @@ public class Palette : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isMouseButtonDown = false;
+            hasBlended = false;
         }
         if (isMouseButtonDown)
         {
@@ -136,13 +138,17 @@ public class Palette : MonoBehaviour
 
                     if (pixelX >= 0 && pixelX < textureSize.x && pixelY >= 0 && pixelY < textureSize.y)
                     {
+                        if (hasBlended)
+                        {
+                            texture.SetPixel(pixelX, pixelY, lastMix);
+                            continue;
+                        }
+                        
                         Color mix = color;
-                        // Color colorPanel = texture.GetPixel(pixelX, pixelY);
-                        // Debug.Log(texture.GetPixel(pixelX, pixelY));
-
-                        if (selectedColors.Contains(color))
+                        if (selectedColors.Contains(texture.GetPixel(pixelX, pixelY)))
                         {
                             mix = BlendColors(pixelX, pixelY, color);
+                            lastMix = mix;
                         }
 
                         texture.SetPixel(pixelX, pixelY, mix);
@@ -156,13 +162,11 @@ public class Palette : MonoBehaviour
     private Color BlendColors(int x, int y, Color colorSelected)
     {
         Color colorPanel = texture.GetPixel(x, y);
-        // hasBlended = false;
 
-        // if (colorPanel == Color.white || colorPanel == colorSelected)
-        // {
-        //     return colorSelected;
-        // }
-        // if (colorUsed.Contains())
+        if (colorPanel == Color.white || colorPanel == colorSelected)
+        {
+            return colorSelected;
+        }
         if (new Color(0.863f, 0.529f, 0.286f, 1.000f) == colorPanel)
         {
             return colorSelected;
@@ -172,7 +176,8 @@ public class Palette : MonoBehaviour
         float r = Mathf.Lerp(colorPanel.r, colorSelected.r, blendFactor);
         float g = Mathf.Lerp(colorPanel.g, colorSelected.g, blendFactor);
         float b = Mathf.Lerp(colorPanel.b, colorSelected.b, blendFactor);
-        Color ret = new Color(r, g, b, 1.0f);
+        float a = Mathf.Lerp(colorPanel.a, colorSelected.a, blendFactor);
+        Color ret = new Color(r, g, b, a);
         hasBlended = true;
         return ret;
     }
