@@ -6,11 +6,15 @@ public class GridNode
 {
     public ColorsEnum color;
     public int id;
+    public Color colorHex;
+    public SpriteRenderer spriteRenderer;
 
-    public GridNode(ColorsEnum color, int id)
+    public GridNode(ColorsEnum color, int id, Color colorHex, SpriteRenderer spriteRenderer)
     {
         this.color = color;
         this.id = id;
+        this.colorHex = colorHex;
+        this.spriteRenderer = spriteRenderer;
     }
 }
 
@@ -34,9 +38,9 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < gridHeight; y++)
             {
                 Vector3 position = new Vector3(x * squareSize - offsetX, y * squareSize - offsetY, 0);
-                Instantiate(squarePrefab, position, Quaternion.identity);
-                squarePrefab.GetComponent<StoreGridNodeId>().id = id;
-                GridNode gridNode = new GridNode(ColorsEnum.WHITE, id);
+                GameObject newObj = Instantiate(squarePrefab, position, Quaternion.identity);
+                newObj.GetComponent<StoreGridNodeId>().id = id;
+                GridNode gridNode = new GridNode(ColorsEnum.WHITE, id, Color.white,  newObj.GetComponent<SpriteRenderer>());
                 onGridUnitSpawnEvent.Raise(gridNode);
                 id++;
             }

@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using DefaultNamespace;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FollowCursor : MonoBehaviour
@@ -11,10 +10,22 @@ public class FollowCursor : MonoBehaviour
     [SerializeField] private GridStateManager gridStateManager;
     private bool isMouseInZone;
     private bool isMouseButtonDown;
-    private ColorsEnum currentColor = ColorsEnum.BLUE;
-    // Start is called before the first frame update
+    private ColorsEnum currentColor = ColorsEnum.WHITE;
+    private Color currentPaintColor = Color.white;
+    [SerializeField] private OnColorChoiceListener onColorChoiceListener;
+    private bool hasBlended;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        onColorChoiceListener.Response.AddListener(SetCurrentColor);
+    }
+    
+    public void SetCurrentColor(Color color)
+    {
+        hasBlended = false;
+        currentPaintColor = color;
+    }
+
     void Update()
     {
         if (isMouseInZone)
@@ -38,7 +49,6 @@ public class FollowCursor : MonoBehaviour
 
     private void PaintSquares(Vector3 position)
     {
-        // Use a small overlap circle to detect multiple squares under the cursor
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, 0.4f);
 
         foreach (Collider2D hitCollider in hitColliders)
@@ -46,10 +56,35 @@ public class FollowCursor : MonoBehaviour
             SpriteRenderer squareRenderer = hitCollider.GetComponent<SpriteRenderer>();
             if (squareRenderer != null && hitCollider != this.GetComponent<Collider2D>())
             {
-                gridStateManager.UpdateNodeColorById(hitCollider.gameObject.GetComponent<StoreGridNodeId>().id, currentColor);
-                squareRenderer.color = Color.blue;
+                // squareRenderer.color = currentPaintColor;
+                if (!hasBlended)
+                {
+                    squareRenderer.color = BlendColors(currentPaintColor, squareRenderer.color);
+                    currentPaintColor = squareRenderer.color;
+                }
+                else
+                {
+                    squareRenderer.color = currentPaintColor;
+                }
+                gridStateManager.UpdateNodeColorById(hitCollider.gameObject.GetComponent<StoreGridNodeId>().id, currentColor, currentPaintColor);
             }
         }
+    }
+    
+    private Color BlendColors(Color color1, Color color2)
+    {
+        if (color2 == Color.white || color1 == color2)
+        {
+            return color1;
+        }
+        float blendFactor = 0.5f; // You can adjust this factor to control the blending weight
+        float r = Mathf.Lerp(color1.r, color2.r, blendFactor);
+        float g = Mathf.Lerp(color1.g, color2.g, blendFactor);
+        float b = Mathf.Lerp(color1.b, color2.b, blendFactor);
+        Color ret = new Color(r, g, b, 1.0f);
+        Debug.Log(ret.ToHexString());
+        hasBlended = true;
+        return ret;
     }
 
     private void LerpToMouse()
