@@ -44,8 +44,6 @@ public class GridStateManager : MonoBehaviour
     
     public void ResetGrid()
     {
-        Debug.Log("Resetting grid");
-        Debug.Log(gridNodes.Count);
         foreach (GridNode gridNode in gridNodes)
         {
             gridNode.spriteRenderer.color = Color.white;
