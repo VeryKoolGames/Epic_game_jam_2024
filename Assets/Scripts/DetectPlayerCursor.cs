@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DetectPlayerCursor : MonoBehaviour
 {
-    [SerializeField] private FollowCursor _followCursor;
+    [SerializeField] private UnityEvent<bool> onZoneEnter;
     [SerializeField] private Color testColor;
     private bool isMouseInZone;
 
@@ -18,7 +19,7 @@ public class DetectPlayerCursor : MonoBehaviour
             if (!isMouseInZone)
             {
                 isMouseInZone = true;
-                _followCursor.SetIsMouseInZone(true);
+                onZoneEnter.Invoke(true);
             }
         }
         else
@@ -26,7 +27,7 @@ public class DetectPlayerCursor : MonoBehaviour
             if (isMouseInZone)
             {
                 isMouseInZone = false;
-                _followCursor.SetIsMouseInZone(false);
+                onZoneEnter.Invoke(false);
             }
         }
     }
