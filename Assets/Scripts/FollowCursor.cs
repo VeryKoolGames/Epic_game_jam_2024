@@ -51,6 +51,7 @@ public class FollowCursor : MonoBehaviour
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, 0.4f);
 
+        int n = 0;
         foreach (Collider2D hitCollider in hitColliders)
         {
             SpriteRenderer squareRenderer = hitCollider.GetComponent<SpriteRenderer>();
@@ -66,8 +67,10 @@ public class FollowCursor : MonoBehaviour
                     squareRenderer.color = currentPaintColor;
                 }
                 gridStateManager.UpdateNodeColorById(hitCollider.gameObject.GetComponent<StoreGridNodeId>().id, currentColor, currentPaintColor);
+                n++;
             }
         }
+        Debug.Log("paintsquares: "+n); // un clic == 245
     }
     
     private Color BlendColors(Color color1, Color color2)

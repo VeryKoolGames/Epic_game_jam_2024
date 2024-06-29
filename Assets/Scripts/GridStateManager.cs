@@ -7,7 +7,7 @@ public class GridStateManager : MonoBehaviour
 {
     public List<GridNode> gridNodes = new List<GridNode>();
     [SerializeField] private OnGridUnitSpawnListener onGridUnitSpawnListener;
-    void Start()
+    void Awake()
     {
         onGridUnitSpawnListener.Response.AddListener(StoreGridNodes);
     }
