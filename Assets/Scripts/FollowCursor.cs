@@ -1,6 +1,7 @@
 using System;
 using DefaultNamespace;
 using DG.Tweening;
+using FMOD.Studio;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,9 +20,11 @@ public class FollowCursor : MonoBehaviour
     private Color[] originalPixels; // To store the original pixels
     private Vector2Int textureSize;
     private int id;
+    private EventInstance smallBrushSound;
 
-    private void Start()
+    private void Awake()
     {
+        smallBrushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.smallBrushSound);
         texture = DuplicateTexture(spriteRenderer.sprite.texture);
         originalPixels = texture.GetPixels(); // Store the original pixels
 
@@ -66,11 +69,13 @@ public class FollowCursor : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isMouseButtonDown = true;
+                smallBrushSound.start();
             }
             
         }
         if (Input.GetMouseButtonUp(0))
         {
+            smallBrushSound.stop(STOP_MODE.IMMEDIATE);
             isMouseButtonDown = false;
         }
         if (isMouseButtonDown)
@@ -185,6 +190,7 @@ public class FollowCursor : MonoBehaviour
         if (!value)
         {
             isMouseButtonDown = false;
+            smallBrushSound.stop(STOP_MODE.IMMEDIATE);
         }
         isMouseInZone = value;
     }

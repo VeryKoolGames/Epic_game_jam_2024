@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimerManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class TimerManager : MonoBehaviour
     private float baseTimeToFinish;
     [SerializeField] private int currentSpeed = 1;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private UnityEvent onTimerEnd;
     // [SerializeField] private CanvasSaver canvasSaver;
     // Start is called before the first frame update
     void Start()
@@ -23,8 +25,8 @@ public class TimerManager : MonoBehaviour
         timeToFinish -= Time.deltaTime * currentSpeed;
         if (timeToFinish <= 0)
         {
-            timeToFinish = 0;
-            Debug.Log(follow.GetAllPixels().Length);
+            timeToFinish = baseTimeToFinish;
+            onTimerEnd.Invoke();
         }
         UpdateTimerUI();
     }

@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class PaintingParser : MonoBehaviour
 {
-    public Sprite sprite;
+    public SpriteRenderer spriteRenderer;
+    private Sprite sprite;
     private Color[] colors;
     public Color redColor;
     public Color blueColor;
@@ -15,6 +16,7 @@ public class PaintingParser : MonoBehaviour
 
     void Start()
     {
+        sprite = spriteRenderer.sprite;
         if (sprite != null)
         {
             ParseSpriteColors();
