@@ -1,4 +1,5 @@
 using DefaultNamespace;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -25,6 +26,9 @@ public class GridManager : MonoBehaviour
     public int gridHeight = 10;
     public float squareSize = 1.0f;
     [SerializeField] private OnGridUnitSpawnEvent onGridUnitSpawnEvent;
+    [SerializeField] public float positionX;
+    [SerializeField] public float positionY;
+    [SerializeField] public float positionZ;
 
     void Start()
     {
@@ -32,12 +36,21 @@ public class GridManager : MonoBehaviour
         int id = 0;
         float offsetX = (gridWidth - 1) * squareSize / 2.0f;
         float offsetY = (gridHeight - 1) * squareSize / 2.0f;
-
+        
+        if (positionX != 0)
+        {
+            offsetX = positionX;
+        }
+        if (positionY != 0)
+        {
+            offsetY = positionY;
+        }
+        
         for (int x = 0; x < gridWidth; x++)
         {
             for (int y = 0; y < gridHeight; y++)
             {
-                Vector3 position = new Vector3(x * squareSize - offsetX, y * squareSize - offsetY, 0);
+                Vector3 position = new Vector3(x * squareSize + offsetX, y * squareSize + offsetY, positionZ);
                 GameObject newObj = Instantiate(squarePrefab, position, Quaternion.identity);
                 newObj.GetComponent<StoreGridNodeId>().id = id;
                 GridNode gridNode = new GridNode(ColorsEnum.WHITE, id, Color.white,  newObj.GetComponent<SpriteRenderer>());
