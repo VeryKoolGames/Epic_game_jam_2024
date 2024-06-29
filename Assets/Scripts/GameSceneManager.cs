@@ -1,24 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameSceneManager : MonoBehaviour
 {
-    [SerializeField] 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject gameWindow;
+    [SerializeField] private GameObject loadingWindow;
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    [SerializeField] private UnityEvent onGameSceneClosed;
+    // Start is called before the first frame update
     
     public void LaunchLoadingWindow()
     {
-        Debug.Log("Loading window launched");
+        loadingWindow.SetActive(true);
+    }
+    
+    public void CloseGameWindow()
+    {
+        gameWindow.transform.DOScale(0f, .2f).OnComplete(() =>
+        {
+            onGameSceneClosed.Invoke();
+            gameWindow.SetActive(false);
+        });
     }
     
 }
