@@ -86,6 +86,11 @@ public class PaintingParser : MonoBehaviour
         }
     }
 
+    public void ChangePainting()
+    {
+        
+    }
+
     private float ColorDistance(Color c1, Color c2)
     {
         float rDiff = c1.r - c2.r;

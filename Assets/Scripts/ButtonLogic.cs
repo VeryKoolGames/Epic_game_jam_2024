@@ -30,4 +30,9 @@ public class ButtonLogic : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().sprite = hoverSprite;
     }
+
+    public void PlayPaintSound()
+    {
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.splooshSound, transform.position);
+    }
 }

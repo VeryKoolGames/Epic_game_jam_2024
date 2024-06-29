@@ -390,8 +390,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: Fmod/egj_sounds/egj_sounds.fspro
-  sourceBankPath: Fmod/egj_sounds/Build
+  sourceProjectPath: ../Fmod/egj_sounds/egj_sounds.fspro
+  sourceBankPath: ../Fmod/egj_sounds/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1

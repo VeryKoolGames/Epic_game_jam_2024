@@ -11,6 +11,9 @@ public class FmodEvents : MonoBehaviour
     public EventReference doubleClickSound;
     public EventReference smallBrushSound;
     public EventReference musicOne;
+    public EventReference splooshSound;
+    public EventReference tableauArrival;
+    public EventReference tableauDeparture;
 
     private void Awake()
     {

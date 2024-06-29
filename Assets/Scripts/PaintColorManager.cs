@@ -27,7 +27,7 @@ public class PaintColorManager : MonoBehaviour
             StoreColorPick storeColorPick = button.GetComponent<StoreColorPick>();
             if (!storeColorPick.IsOccupied)
             {
-                button.GetComponent<Image>().color = color;
+                button.GetComponent<SpriteRenderer>().color = color;
                 storeColorPick.color = color;
                 storeColorPick.IsOccupied = true;
                 break;
