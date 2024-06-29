@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
@@ -23,7 +24,7 @@ public class PaintingParser : MonoBehaviour
     void ParseSpriteColors()
     {
         Texture2D texture = sprite.texture;
-
+        
         colors = texture.GetPixels((int)sprite.textureRect.x,
             (int)sprite.textureRect.y,
             (int)sprite.textureRect.width,
@@ -52,5 +53,10 @@ public class PaintingParser : MonoBehaviour
         {
             blueColor = newColor;
         }
+    }
+
+    public Color[] GetPaintColors()
+    {
+        return (colors);
     }
 }

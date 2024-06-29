@@ -7,6 +7,7 @@ public class TimerManager : MonoBehaviour
 {
     [SerializeField] private float timeToFinish;
     [SerializeField] private TextMeshProUGUI timerText;
+    public CompareManager compareManager;
     private int currentSpeed = 1;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,9 @@ public class TimerManager : MonoBehaviour
         {
             timeToFinish = 0;
             // Should raise an event to finish game here
+            // percentage correct is:
+            Debug.Log(compareManager.GetPercentageCorrect());
+            // compareManager.GetPercentageCorrect();
         }
         UpdateTimerUI();
     }

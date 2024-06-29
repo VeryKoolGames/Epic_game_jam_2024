@@ -21,9 +21,10 @@ public class GridNode
 public class GridManager : MonoBehaviour
 {
     public GameObject squarePrefab;
-    public int gridWidth = 10;
-    public int gridHeight = 10;
-    public float squareSize = 1.0f;
+    public int gridWidth;
+    public int gridHeight;
+    // KR: w and h should be the same than sqrt(PaintingParser.GetPaintColors.Length)
+    public float squareSize = 0.05f;
     [SerializeField] private OnGridUnitSpawnEvent onGridUnitSpawnEvent;
 
     void Start()
@@ -45,5 +46,6 @@ public class GridManager : MonoBehaviour
                 id++;
             }
         }
+        // KR: id is w*h
     }
 }
