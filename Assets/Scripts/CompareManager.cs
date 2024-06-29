@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 public class CompareManager : MonoBehaviour
 {
-    public GridStateManager gridStateManager;
+    public FollowCursor followCursor;
     public PaintingParser paintingParser;
     private Color[] paintToCopy;
     private Color[] paintFinal;
@@ -16,14 +16,10 @@ public class CompareManager : MonoBehaviour
     private float pCorrect;
     private float compensation;
     
-    void Start()
-    {
-    }
-
     public float GetPercentageCorrect()
     {
         paintToCopy = paintingParser.GetPaintColors();
-        paintFinal = gridStateManager.GetGridColors();
+        paintFinal = followCursor.GetAllPixels();
         nCorrect = paintFinal.Where((x, i) => x.Equals(paintToCopy[i])).Count();
         compensation = HasPlayed() ? 5 : 0; // added 5% more to be happy
         pCorrect = nCorrect / paintFinal.Length * 100 + compensation;

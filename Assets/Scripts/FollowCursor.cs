@@ -22,6 +22,7 @@ public class FollowCursor : MonoBehaviour
     private void Start()
     {
         texture = DuplicateTexture(spriteRenderer.sprite.texture);
+        GetAllPixels();
 
         if (!texture.isReadable)
         {
@@ -31,6 +32,17 @@ public class FollowCursor : MonoBehaviour
         textureSize = new Vector2Int(texture.width, texture.height);
         spriteRenderer.sprite = Sprite.Create(texture, spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f));
         onColorChoiceListener.Response.AddListener(SetCurrentColor);
+    }
+    
+    public void ResetTexture()
+    {
+        texture = DuplicateTexture(spriteRenderer.sprite.texture);
+        spriteRenderer.sprite = Sprite.Create(texture, spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f));
+    }
+    
+    public Color[] GetAllPixels()
+    {
+        return texture.GetPixels();
     }
     
     public void SetCurrentColor(Color color)

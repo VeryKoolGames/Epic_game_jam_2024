@@ -8,7 +8,7 @@ public class TimerManager : MonoBehaviour
     [SerializeField] private float timeToFinish;
     [SerializeField] private int currentSpeed = 1;
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private CanvasSaver canvasSaver;
+    // [SerializeField] private CanvasSaver canvasSaver;
     // Start is called before the first frame update
     void Start()
     {
