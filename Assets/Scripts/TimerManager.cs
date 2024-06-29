@@ -22,7 +22,7 @@ public class TimerManager : MonoBehaviour
         if (timeToFinish <= 0)
         {
             timeToFinish = 0;
-            canvasSaver.SaveCanvasToLeaderboard("Jambon", 1000);
+            // canvasSaver.SaveCanvasToLeaderboard("Jambon", 1000);
             // Should raise an event to finish game here
         }
         UpdateTimerUI();

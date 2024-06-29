@@ -55,7 +55,6 @@ public class CanvasSaver : MonoBehaviour
         texture.Apply();
 
         Sprite canvasSprite = Sprite.Create(texture, new Rect(0, 0, canvasWidth, canvasHeight), new Vector2(0.5f, 0.5f));
-        Debug.Log("Creating sprite " + canvasSprite);
         leaderboard.AddEntry(playerName, completionPercentage, canvasSprite);
     }
 }
