@@ -337,18 +337,6 @@ Transform:
   - {fileID: 2085739508}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &81909471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5988228273340996629, guid: eff66d562b9a041248010e81777a458a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1114433862}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbbb8c9f798e6463c94849e538e85a30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &95833435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1204,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &307656958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4606236350016334953, guid: eff66d562b9a041248010e81777a458a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1114433862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f8219069d6043d08f372c64be481d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &357870099
 GameObject:
   m_ObjectHideFlags: 0
@@ -3724,6 +3724,12 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 734214540}
+    - target: {fileID: 4606236350016334953, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: onGridUnitSpawnEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 7faf6e1ba3d7342caaff444da406b596,
+        type: 2}
     - target: {fileID: 5121603767651781110, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: m_text
@@ -7754,9 +7760,9 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 81909471}
-        m_TargetAssemblyTypeName: GridStateManager, Assembly-CSharp
-        m_MethodName: ResetGrid
+      - m_Target: {fileID: 307656958}
+        m_TargetAssemblyTypeName: FollowCursor, Assembly-CSharp
+        m_MethodName: ResetTexture
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
