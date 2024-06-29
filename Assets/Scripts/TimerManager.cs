@@ -6,6 +6,8 @@ using UnityEngine;
 public class TimerManager : MonoBehaviour
 {
     [SerializeField] private float timeToFinish;
+    [SerializeField] private FollowCursor follow;
+    private float baseTimeToFinish;
     [SerializeField] private int currentSpeed = 1;
     [SerializeField] private TextMeshProUGUI timerText;
     // [SerializeField] private CanvasSaver canvasSaver;
@@ -13,6 +15,7 @@ public class TimerManager : MonoBehaviour
     void Start()
     {
         UpdateTimerUI();
+        baseTimeToFinish = timeToFinish;
     }
 
     void Update()
@@ -21,12 +24,14 @@ public class TimerManager : MonoBehaviour
         if (timeToFinish <= 0)
         {
             timeToFinish = 0;
-            // canvasSaver.SaveCanvasToLeaderboard("Jambon", 1000);
-            // Should raise an event to finish game here
-            // percentage correct is:
-            // Debug.Log(compareManager.GetPercentageCorrect());
-            // compareManager.GetPercentageCorrect();
+            Debug.Log(follow.GetAllPixels().Length);
         }
+        UpdateTimerUI();
+    }
+    
+    public void ResetTimer()
+    {
+        timeToFinish = baseTimeToFinish;
         UpdateTimerUI();
     }
 

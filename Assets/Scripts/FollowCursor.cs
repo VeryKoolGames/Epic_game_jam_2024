@@ -16,19 +16,19 @@ public class FollowCursor : MonoBehaviour
     private bool hasBlended;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Texture2D texture;
+    private Color[] originalPixels; // To store the original pixels
     private Vector2Int textureSize;
     private int id;
 
     private void Start()
     {
         texture = DuplicateTexture(spriteRenderer.sprite.texture);
-        GetAllPixels();
+        originalPixels = texture.GetPixels(); // Store the original pixels
 
         if (!texture.isReadable)
         {
             return;
         }
-
         textureSize = new Vector2Int(texture.width, texture.height);
         spriteRenderer.sprite = Sprite.Create(texture, spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f));
         onColorChoiceListener.Response.AddListener(SetCurrentColor);
@@ -36,8 +36,15 @@ public class FollowCursor : MonoBehaviour
     
     public void ResetTexture()
     {
-        texture = DuplicateTexture(spriteRenderer.sprite.texture);
-        spriteRenderer.sprite = Sprite.Create(texture, spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f));
+        Debug.Log(texture);
+        Color[] whitePixels = new Color[textureSize.x * textureSize.y];
+        for (int i = 0; i < whitePixels.Length; i++)
+        {
+            whitePixels[i] = Color.white;
+        }
+
+        texture.SetPixels(whitePixels); // Set all pixels to white
+        texture.Apply();
     }
     
     public Color[] GetAllPixels()
@@ -148,6 +155,7 @@ public class FollowCursor : MonoBehaviour
             }
         }
         texture.Apply();
+        Debug.Log(texture.GetPixels().Length);
     }
     
     private Color BlendColors(Color color1, Color color2)
@@ -179,11 +187,6 @@ public class FollowCursor : MonoBehaviour
             isMouseButtonDown = false;
         }
         isMouseInZone = value;
-    }
-
-    private void MoveCursorTowardsCenter()
-    {
-        transform.DOMove(Vector3.zero, 0.5f);
     }
 
     private void OnDrawGizmos()
