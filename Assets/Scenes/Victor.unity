@@ -237,7 +237,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 230406213}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 230406216}
+        m_TargetAssemblyTypeName: StoreColorPick, Assembly-CSharp
+        m_MethodName: OnColorPick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &230406213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
+  onColorChoiceEvent: {fileID: 11400000, guid: e441b490e7da841c480c42d9bd9eb884, type: 2}
 --- !u!1 &287708669
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
+  onColorChoiceEvent: {fileID: 11400000, guid: e441b490e7da841c480c42d9bd9eb884, type: 2}
 --- !u!114 &379361136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,7 +538,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 379361137}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 379361135}
+        m_TargetAssemblyTypeName: StoreColorPick, Assembly-CSharp
+        m_MethodName: OnColorPick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &379361137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +841,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 702704372}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 702704375}
+        m_TargetAssemblyTypeName: StoreColorPick, Assembly-CSharp
+        m_MethodName: OnColorPick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &702704372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,6 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
+  onColorChoiceEvent: {fileID: 11400000, guid: e441b490e7da841c480c42d9bd9eb884, type: 2}
 --- !u!1 &747888116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,6 +1722,7 @@ GameObject:
   - component: {fileID: 1775123367}
   - component: {fileID: 1775123368}
   - component: {fileID: 1775123369}
+  - component: {fileID: 1775123370}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -1807,6 +1847,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   gridStateManager: {fileID: 1755936292}
+  onColorChoiceListener: {fileID: 1775123370}
+--- !u!114 &1775123370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775123363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589a0fc5332646a9bc1431c5b8911df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e441b490e7da841c480c42d9bd9eb884, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2012735337
 GameObject:
   m_ObjectHideFlags: 0
