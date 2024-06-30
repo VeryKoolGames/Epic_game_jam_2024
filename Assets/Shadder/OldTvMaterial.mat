@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _Fade: -0.001565854
+    - _Fade: -0.0005795231
     - _SetBlack: 0
     - _Steps: 20
     m_Colors:

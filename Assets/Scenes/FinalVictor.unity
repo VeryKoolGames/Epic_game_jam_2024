@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -934,6 +934,118 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &335440617 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8664431231183590143, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+    type: 3}
+  m_PrefabInstance: {fileID: 401098668}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &361206879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 361206880}
+  - component: {fileID: 361206882}
+  - component: {fileID: 361206881}
+  m_Layer: 0
+  m_Name: MouseDragPalette
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &361206880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361206879}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.76, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 335440617}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &361206881
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361206879}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8.39, y: -4.94}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.05, y: 3.57}
+  m_EdgeRadius: 0
+--- !u!114 &361206882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361206879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e469770c1a96448508dfad299ea8ff1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onZoneEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1021285554}
+        m_TargetAssemblyTypeName: Palette, Assembly-CSharp
+        m_MethodName: SetIsMouseInZone
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  testColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &385067585 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 758083944285363878, guid: 27e3450cdddb24e29a83996dee84e948,
@@ -1071,6 +1183,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3083637519701871343, guid: aecaf9d4fec0f4deb9d09abe3993614a,
         type: 3}
       propertyPath: m_SortingOrder
@@ -1158,8 +1280,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8664431231183590143, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 361206880}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7694130284804614266, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1021285554}
   m_SourcePrefab: {fileID: 100100000, guid: aecaf9d4fec0f4deb9d09abe3993614a, type: 3}
 --- !u!1 &410255379
 GameObject:
@@ -1272,7 +1402,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.97, y: -3.27, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 45587550}
@@ -1418,6 +1548,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3693756404625715205, guid: 27e3450cdddb24e29a83996dee84e948,
     type: 3}
   m_PrefabInstance: {fileID: 1289920437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &508480389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7694130284804614266, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+    type: 3}
+  m_PrefabInstance: {fileID: 401098668}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &535919649
 GameObject:
@@ -2811,12 +2947,38 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 401098668}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 508480389}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90f8219069d6043d08f372c64be481d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1021285550 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+    type: 3}
+  m_PrefabInstance: {fileID: 401098668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508480389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589a0fc5332646a9bc1431c5b8911df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1021285554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508480389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af9a79667df0064091a30ddddbdcae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onColorChoiceListener: {fileID: 1021285550}
+  spriteRenderer: {fileID: 441817639}
 --- !u!1 &1029987745
 GameObject:
   m_ObjectHideFlags: 0
@@ -3165,6 +3327,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 744549716787685009, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 837280737197959307, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
@@ -6851,6 +7018,11 @@ MonoBehaviour:
   redColor: {r: 0, g: 0, b: 0, a: 0}
   blueColor: {r: 0, g: 0, b: 0, a: 0}
   yellowColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  unlockColor1: {r: 0, g: 0, b: 0, a: 0}
+  unlockColor2: {r: 0, g: 0, b: 0, a: 0}
+  unlockColor3: {r: 0, g: 0, b: 0, a: 0}
+  unlockColor4: {r: 0, g: 0, b: 0, a: 0}
   onColorParsedEvent: {fileID: 11400000, guid: a43e94038aaa443b4aed83fe916bec03, type: 2}
 --- !u!114 &1973862659
 MonoBehaviour:
