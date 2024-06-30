@@ -61,7 +61,6 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
     }
   }
   public void ResetGameState() {
-    Debug.Log("RESET");
     
     // Reset sprite to unclicked and not mine
     for (int i = 0; i < tiles.Count; i++)
