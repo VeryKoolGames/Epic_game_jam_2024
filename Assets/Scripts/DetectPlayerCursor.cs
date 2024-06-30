@@ -5,6 +5,7 @@ public class DetectPlayerCursor : MonoBehaviour
 {
     [SerializeField] private UnityEvent<bool> onZoneEnter;
     [SerializeField] private Color testColor;
+    [SerializeField] private Collider2D zoneCollider;
     private bool isMouseInZone;
 
     void Update()
@@ -31,5 +32,15 @@ public class DetectPlayerCursor : MonoBehaviour
             }
         }
     }
+
+    public void DeactivateCanvas()
+    {
+        zoneCollider.enabled = false;
+    }
     
+    public void ActivateCanvas()
+    {
+        zoneCollider.enabled = true;
+    }
+
 }

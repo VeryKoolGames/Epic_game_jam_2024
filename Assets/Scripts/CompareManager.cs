@@ -16,18 +16,42 @@ public class CompareManager : MonoBehaviour
     private float pCorrect;
     private float compensation;
     
-    public void GetPercentageCorrect()
+    public int GetPercentageCorrect()
     {
         paintToCopy = paintingParser.GetPaintColors();
         paintFinal = followCursor.GetAllPixels();
-        Debug.Log("First pixel of paint: " + paintToCopy[0]);
-        Debug.Log("First pixel of final: " + paintFinal[0]);
+        Debug.Log(paintFinal.Length);
+        Debug.Log(paintToCopy.Length);
+        
         nCorrect = paintFinal.Where((x, i) => ColorsAreSimilar(x, paintToCopy[i])).Count();
         compensation = HasPlayed() ? 5 : 0; // added 5% more to be happy
         pCorrect = (float)nCorrect / paintFinal.Length * 100 + compensation;
         float ret = (pCorrect > 100 ? 100 : pCorrect);
-        Debug.Log("Correct: " + ret);
-        // return ret;
+        return percentageToInt(ret);
+    }
+    
+    private int percentageToInt(float percentage)
+    {
+        if ((int)percentage <= 20)
+        {
+            return 0;
+        }
+        else if ((int)percentage <= 40)
+        {
+            return 1;
+        }
+        else if ((int)percentage <= 60)
+        {
+            return 2;
+        }
+        else if ((int)percentage <= 80)
+        {
+            return 3;
+        }
+        else
+        {
+            return 4;
+        }
     }
 
     public bool ColorsAreSimilar(Color a, Color b, float tolerance = 0.05f)

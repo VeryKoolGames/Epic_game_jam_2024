@@ -13,16 +13,11 @@ public class TimerManager : MonoBehaviour
     [SerializeField] private int currentSpeed = 1;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private UnityEvent onTimerEnd;
+    [SerializeField] private UnityEvent onTimerRestart;
+    [SerializeField] private GameObject finishPopUp;
     private bool isDelay = true;
     private bool isTimerRunning = true;
-    // [SerializeField] private CanvasSaver canvasSaver;
-    // Start is called before the first frame update
-    // void Start()
-    // {
-    //     UpdateTimerUI();
-    //     baseTimeToFinish = timeToFinish;
-    //     StartCoroutine(delayStart());
-    // }
+    private int countPainting;
 
     private void OnEnable()
     {
@@ -34,6 +29,7 @@ public class TimerManager : MonoBehaviour
     
     public void StartTimer()
     {
+        countPainting++;
         isTimerRunning = true;
     }
     
@@ -60,6 +56,9 @@ public class TimerManager : MonoBehaviour
         {
             timeToFinish = baseTimeToFinish;
             currentSpeed = 1;
+            StopTimer();
+            if (countPainting < 2)
+                finishPopUp.SetActive(true);
             onTimerEnd.Invoke();
         }
         UpdateTimerUI();
