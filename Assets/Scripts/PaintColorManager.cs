@@ -4,35 +4,39 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PaintColorManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> colorPickingButtons = new List<GameObject>();
+    [SerializeField] private List<GameObject> colorPickingButtonsLock = new List<GameObject>();
     [SerializeField] private OnColorSpawnedListener onColorSpawnedListener;
     private int numberOfColors = 0;
     private List<Color> unlockableColors = new List<Color>();
     private const float colorThreshold = 0.1f; // Threshold for color comparison
 
-    private void Awake()
+    private void OnEnable()
     {
         onColorSpawnedListener.Response.AddListener(SetColor);
     }
 
     private void OnDisable()
     {
+        ClearButtons();
         onColorSpawnedListener.Response.RemoveListener(SetColor);
     }
     
     public void ClearButtons()
     {
-        foreach (var button in colorPickingButtons)
+        for (int i = 0; i < colorPickingButtons.Count - 1; i++)
         {
-            StoreColorPick storeColorPick = button.GetComponent<StoreColorPick>();
-            button.GetComponent<SpriteRenderer>().color = Color.white;
+            StoreColorPick storeColorPick = colorPickingButtons[i].GetComponent<StoreColorPick>();
+            colorPickingButtons[i].GetComponent<SpriteRenderer>().color = Color.white;
             storeColorPick.IsOccupied = false;
             storeColorPick.color = Color.white;
-            button.transform.localScale = new Vector3(0, 0, 0);
+            colorPickingButtons[i].transform.localScale = new Vector3(0, 0, 0);
+            colorPickingButtonsLock[i].GetComponent<ButtonLogic>().UnlockButton();
         }
         numberOfColors = 0;
         unlockableColors.Clear();
@@ -53,13 +57,14 @@ public class PaintColorManager : MonoBehaviour
 
     private void UpdateUnlockableUI(Color unlockableColor)
     {
-        foreach (var button in colorPickingButtons)
+        for (int i = 0; i < colorPickingButtons.Count; i++)
         {
-            StoreColorPick storeColorPick = button.GetComponent<StoreColorPick>();
+            StoreColorPick storeColorPick = colorPickingButtons[i].GetComponent<StoreColorPick>();
             if (storeColorPick.color == unlockableColor)
             {
-                button.transform.localScale = new Vector3(0, 0, 0);
-                button.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
+                colorPickingButtons[i].transform.localScale = new Vector3(0, 0, 0);
+                colorPickingButtons[i].transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
+                colorPickingButtonsLock[i].GetComponent<ButtonLogic>().UnlockButton();
                 break;
             }
         }
@@ -76,23 +81,24 @@ public class PaintColorManager : MonoBehaviour
     public void SetColor(Color color)
     {
         Debug.Log("Setting color: " + color);
-        foreach (var button in colorPickingButtons)
+        for (int i = 0; i < colorPickingButtons.Count; i++)
         {
-            StoreColorPick storeColorPick = button.GetComponent<StoreColorPick>();
+            StoreColorPick storeColorPick = colorPickingButtons[i].GetComponent<StoreColorPick>();
             if (!storeColorPick.IsOccupied)
             {
                 numberOfColors += 1;
-                button.transform.localScale = new Vector3(0, 0, 0);
-                button.GetComponent<SpriteRenderer>().color = color;
+                colorPickingButtons[i].transform.localScale = new Vector3(0, 0, 0);
+                colorPickingButtons[i].GetComponent<SpriteRenderer>().color = color;
                 storeColorPick.color = color;
                 storeColorPick.IsOccupied = true;
                 if (numberOfColors < 4)
                 {
-                    button.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
+                    colorPickingButtons[i].transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
                 }
                 else
                 {
                     unlockableColors.Add(color);
+                    colorPickingButtonsLock[i].GetComponent<ButtonLogic>().LockButton();
                 }
                 break;
             }

@@ -17,6 +17,7 @@ public class PaintingUpdater : MonoBehaviour
 
     private void OnEnable()
     {
+        currentPaintingIndex = 0;
         mainMusics.Add(AudioManager.Instance.CreateInstance(FmodEvents.Instance.musicOne));
         mainMusics.Add(AudioManager.Instance.CreateInstance(FmodEvents.Instance.musicTwo));
         mainMusics.Add(AudioManager.Instance.CreateInstance(FmodEvents.Instance.musicThree));
@@ -55,6 +56,7 @@ public class PaintingUpdater : MonoBehaviour
     private void OnDisable()
     {
         currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
+        mainMusics.Clear();
         paintingCopy = paintings;
     }
 }

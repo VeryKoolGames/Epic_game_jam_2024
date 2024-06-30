@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class FadeEffectController : MonoBehaviour
 {
-    public Material fadeMaterial;
     [SerializeField] private SpriteRenderer paintingRenderer;
+    [SerializeField] private SpriteRenderer overlayRenderer;
+    [SerializeField] private PaintingParser paintingParser;
     public float fadeDuration = 2.0f;
-    private float fadeAmount = 0.0f;
     private bool startFade = false;
     private bool fadeOut = true; // Determines the direction of the fade
-    private int fadeSteps = 2;
-    [SerializeField] private PaintingParser paintingParser;
+    private int fadeSteps = 20; // Number of steps in the fade effect
 
-    private void OnEnable()
+    private Vector3 initialOverlayScale;
+
+    private void Start()
     {
-        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.welcomeSound, transform.position);
+        overlayRenderer.color = Color.black;
+        initialOverlayScale = overlayRenderer.transform.localScale;
     }
 
     public void FadePainting(Sprite painting)
@@ -27,18 +29,15 @@ public class FadeEffectController : MonoBehaviour
 
     public void FirstFade(Sprite painting)
     {
-        fadeAmount = 1.0f;
-        fadeMaterial.SetFloat("_SetBlack", 1.0f);
-        fadeMaterial.SetFloat("_Fade", fadeAmount);
-
         paintingRenderer.sprite = painting;
-
-        StartCoroutine(delayStart());
+        StartCoroutine(DelayStart());
     }
-    
-    IEnumerator delayStart()
+
+    private IEnumerator DelayStart()
     {
         yield return new WaitForSeconds(1);
+        paintingParser.parsePainting();
+        Debug.Log("Parsing painting in first fade");
         StartFadeIn();
     }
 
@@ -51,54 +50,55 @@ public class FadeEffectController : MonoBehaviour
         StartFadeIn();
     }
 
-    void Update()
+    private void Update()
     {
         if (startFade)
         {
-            float stepIncrement = 1.0f / fadeSteps;
+            float stepTime = fadeDuration / fadeSteps;
+            StartCoroutine(ApplyFadeEffect(stepTime));
+        }
+    }
 
-            if (fadeOut)
+    private IEnumerator ApplyFadeEffect(float stepTime)
+    {
+        startFade = false;
+        float stepScale = initialOverlayScale.y / fadeSteps;
+
+        if (fadeOut)
+        {
+            for (int i = 0; i <= fadeSteps; i++)
             {
-                fadeAmount += stepIncrement * Time.deltaTime / fadeDuration;
-                fadeMaterial.SetFloat("_Fade", fadeAmount);
-
-                if (fadeAmount >= 1.0f)
-                {
-                    startFade = false;
-                    fadeAmount = 1.0f;
-                }
-            }
-            else
-            {
-                fadeAmount -= stepIncrement * Time.deltaTime / fadeDuration;
-                fadeMaterial.SetFloat("_Fade", fadeAmount);
-
-                if (fadeAmount <= 0.0f)
-                {
-                    startFade = false;
-                    fadeAmount = 0.0f;
-                }
+                overlayRenderer.transform.localScale = new Vector3(initialOverlayScale.x, stepScale * i, initialOverlayScale.z);
+                yield return new WaitForSeconds(stepTime);
             }
         }
+        else
+        {
+            for (int i = fadeSteps; i >= 0; i--)
+            {
+                overlayRenderer.transform.localScale = new Vector3(initialOverlayScale.x, stepScale * i, initialOverlayScale.z);
+                yield return new WaitForSeconds(stepTime);
+            }
+        }
+        overlayRenderer.transform.localScale = new Vector3(initialOverlayScale.x, fadeOut ? initialOverlayScale.y : 0, initialOverlayScale.z);
     }
 
     public void StartFadeOut()
     {
-        fadeAmount = 0.0f; // Ensure fade starts from fully visible
-        fadeMaterial.SetFloat("_SetBlack", 0.0f);
-        fadeMaterial.SetFloat("_Fade", fadeAmount);
-
+        overlayRenderer.transform.localScale = new Vector3(initialOverlayScale.x, 0, initialOverlayScale.z);
         fadeOut = true;
         startFade = true;
     }
 
     public void StartFadeIn()
     {
-        fadeAmount = 1.0f; // Ensure fade starts from fully black
-        fadeMaterial.SetFloat("_SetBlack", 0.0f);
-        fadeMaterial.SetFloat("_Fade", fadeAmount);
-
+        overlayRenderer.transform.localScale = initialOverlayScale;
         fadeOut = false;
         startFade = true;
+    }
+
+    private void OnDisable()
+    {
+        overlayRenderer.transform.localScale = initialOverlayScale;
     }
 }
