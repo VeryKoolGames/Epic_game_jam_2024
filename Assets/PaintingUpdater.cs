@@ -54,6 +54,7 @@ public class PaintingUpdater : MonoBehaviour
 
     private void OnDisable()
     {
+        currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
         paintingCopy = paintings;
     }
 }

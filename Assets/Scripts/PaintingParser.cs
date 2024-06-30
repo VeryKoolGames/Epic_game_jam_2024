@@ -36,11 +36,15 @@ public class PaintingParser : MonoBehaviour
         }
     }
     
-    private void ResetAll()
+    public void ResetAll()
     {
         closestDistanceToRed = float.MaxValue;
         closestDistanceToBlue = float.MaxValue;
         closestDistanceToYellow = float.MaxValue;
+        unlockColor1 = defaultColor;
+        unlockColor2 = defaultColor;
+        unlockColor3 = defaultColor;
+        unlockColor4 = defaultColor;
 
         closestToRedColor = Color.black;
         closestToBlueColor = Color.black;
@@ -99,6 +103,10 @@ public class PaintingParser : MonoBehaviour
 
     private void getLastColorToUnlock(Color newColor)
     {
+        if (newColor == Color.white)
+        {
+            return;
+        }
         if (newColor == closestToRedColor)
         {
             return;

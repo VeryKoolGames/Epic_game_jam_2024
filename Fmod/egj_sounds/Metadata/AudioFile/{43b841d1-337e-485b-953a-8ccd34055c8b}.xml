@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{43b841d1-337e-485b-953a-8ccd34055c8b}">
+		<property name="assetPath">
+			<value>Brushes/brush-small.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>20.048375</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{dc0a8382-1b1b-48a5-8b79-0e9e4f68db0b}</destination>
+		</relationship>
+	</object>
+</objects>

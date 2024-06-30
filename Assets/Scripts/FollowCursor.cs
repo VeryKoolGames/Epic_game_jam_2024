@@ -22,6 +22,7 @@ public class FollowCursor : MonoBehaviour
     private int id;
     private EventInstance smallBrushSound;
     private int brushSize = 20;
+    [SerializeField] private Animator playerAnimator;
 
     private void Awake()
     {
@@ -81,6 +82,7 @@ public class FollowCursor : MonoBehaviour
             {
                 isMouseButtonDown = true;
                 smallBrushSound.start();
+                playerAnimator.SetBool("isPainting", true);
             }
             
         }
@@ -88,6 +90,7 @@ public class FollowCursor : MonoBehaviour
         {
             smallBrushSound.stop(STOP_MODE.IMMEDIATE);
             isMouseButtonDown = false;
+            playerAnimator.SetBool("isPainting", false);
         }
         if (isMouseButtonDown)
         {

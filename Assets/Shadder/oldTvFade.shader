@@ -70,4 +70,5 @@ Shader "Custom/OldTVFade"
             ENDCG
         }
     }
+    FallBack "Diffuse"
 }

@@ -9,6 +9,10 @@ public class EndPopUpManager : MonoBehaviour
     // Start is called before the first frame update
     public void CloseWindow()
     {
-        window.transform.DOScale(0f, .2f).OnComplete((() => window.SetActive(false)));
+        window.transform.DOScale(0f, .2f).OnComplete((() =>
+        {
+            window.SetActive(false);
+            gameObject.SetActive(false);
+        }));
     }
 }
