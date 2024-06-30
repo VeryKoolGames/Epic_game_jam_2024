@@ -30,6 +30,20 @@ public class CompareManager : MonoBehaviour
         return percentageToInt(ret);
     }
     
+    public int GetIntPercentage()
+    {
+        paintToCopy = paintingParser.GetPaintColors();
+        paintFinal = followCursor.GetAllPixels();
+        Debug.Log(paintFinal.Length);
+        Debug.Log(paintToCopy.Length);
+        
+        nCorrect = paintFinal.Where((x, i) => ColorsAreSimilar(x, paintToCopy[i])).Count();
+        compensation = HasPlayed() ? 5 : 0; // added 5% more to be happy
+        pCorrect = (float)nCorrect / paintFinal.Length * 100 + compensation;
+        float ret = (pCorrect > 100 ? 100 : pCorrect);
+        return (int)ret;
+    }
+    
     private int percentageToInt(float percentage)
     {
         if ((int)percentage <= 20)

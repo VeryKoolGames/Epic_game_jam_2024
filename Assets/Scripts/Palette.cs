@@ -22,8 +22,9 @@ public class Palette : MonoBehaviour
 
     private void Start()
     {
-        texture = new Texture2D(spriteRenderer.sprite.texture.width, spriteRenderer.sprite.texture.height, spriteRenderer.sprite.texture.format, false);
-        Graphics.CopyTexture(spriteRenderer.sprite.texture, texture);
+        texture = DuplicateTexture(spriteRenderer.sprite.texture);
+        // texture = new Texture2D(spriteRenderer.sprite.texture.width, spriteRenderer.sprite.texture.height, spriteRenderer.sprite.texture.format, false);
+        // Graphics.CopyTexture(spriteRenderer.sprite.texture, texture);
         basePixels = texture.GetPixels();
 
         if (!texture.isReadable)
@@ -82,19 +83,19 @@ public class Palette : MonoBehaviour
             source.height,
             0,
             RenderTextureFormat.ARGB32,
-            RenderTextureReadWrite.Linear);
+            RenderTextureReadWrite.sRGB);
 
         Graphics.Blit(source, renderTex);
         RenderTexture previous = RenderTexture.active;
         RenderTexture.active = renderTex;
-        
+
         Texture2D readableText = new Texture2D(source.width, source.height);
         readableText.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
         readableText.Apply();
-        
+
         RenderTexture.active = previous;
         RenderTexture.ReleaseTemporary(renderTex);
-        
+
         return readableText;
     }
 
@@ -103,7 +104,7 @@ public class Palette : MonoBehaviour
         Vector2 localPoint;
         if (GetMousePixelPosition(out localPoint))
         {
-            PaintPixels(localPoint, currentPaintColor, 20);
+            PaintPixels(localPoint, currentPaintColor, 40);
         }
     }
     

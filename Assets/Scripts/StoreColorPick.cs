@@ -22,6 +22,7 @@ public class StoreColorPick : MonoBehaviour
     }
     public void OnColorPick()
     {
-        onColorChoiceEvent.Raise(color);
+        if (isOccupied)
+            onColorChoiceEvent.Raise(color);
     }
 }

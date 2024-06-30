@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -12,7 +13,11 @@ public class GameSceneManager : MonoBehaviour
 
     [SerializeField] private UnityEvent onGameSceneClosed;
     // Start is called before the first frame update
-    
+    private void Awake()
+    {
+        Cursor.visible = false;
+    }
+
     public void LaunchLoadingWindow()
     {
         loadingWindow.SetActive(true);
