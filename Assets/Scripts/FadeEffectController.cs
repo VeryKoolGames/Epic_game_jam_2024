@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,20 +9,27 @@ public class FadeEffectController : MonoBehaviour
     private float fadeAmount = 0.0f;
     private bool startFade = false;
     private bool fadeOut = true; // Determines the direction of the fade
-
-    private void Start()
-    {
-        FadePainting(paintingRenderer.sprite);
-    }
+    private int fadeSteps = 2;
 
     public void FadePainting(Sprite painting)
     {
         StartFadeOut();
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.tableauArrival, transform.position);
-        StartCoroutine(waitFade(painting));
+        StartCoroutine(WaitFade(painting));
     }
-    
-    private IEnumerator waitFade(Sprite painting)
+
+    public void FirstFade(Sprite painting)
+    {
+        fadeAmount = 1.0f; // Ensure fade starts from black
+        fadeMaterial.SetFloat("_SetBlack", 1.0f);
+        fadeMaterial.SetFloat("_Fade", fadeAmount);
+
+        paintingRenderer.sprite = painting;
+
+        StartFadeIn();
+    }
+
+    private IEnumerator WaitFade(Sprite painting)
     {
         yield return new WaitForSeconds(1);
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.tableauDeparture, transform.position);
@@ -35,9 +41,11 @@ public class FadeEffectController : MonoBehaviour
     {
         if (startFade)
         {
+            float stepIncrement = 1.0f / fadeSteps;
+
             if (fadeOut)
             {
-                fadeAmount += Time.deltaTime / fadeDuration;
+                fadeAmount += stepIncrement * Time.deltaTime / fadeDuration;
                 fadeMaterial.SetFloat("_Fade", fadeAmount);
 
                 if (fadeAmount >= 1.0f)
@@ -48,7 +56,7 @@ public class FadeEffectController : MonoBehaviour
             }
             else
             {
-                fadeAmount -= Time.deltaTime / fadeDuration;
+                fadeAmount -= stepIncrement * Time.deltaTime / fadeDuration;
                 fadeMaterial.SetFloat("_Fade", fadeAmount);
 
                 if (fadeAmount <= 0.0f)
@@ -62,12 +70,20 @@ public class FadeEffectController : MonoBehaviour
 
     public void StartFadeOut()
     {
+        fadeAmount = 0.0f; // Ensure fade starts from fully visible
+        fadeMaterial.SetFloat("_SetBlack", 0.0f);
+        fadeMaterial.SetFloat("_Fade", fadeAmount);
+
         fadeOut = true;
         startFade = true;
     }
 
     public void StartFadeIn()
     {
+        fadeAmount = 1.0f; // Ensure fade starts from fully black
+        fadeMaterial.SetFloat("_SetBlack", 0.0f);
+        fadeMaterial.SetFloat("_Fade", fadeAmount);
+
         fadeOut = false;
         startFade = true;
     }

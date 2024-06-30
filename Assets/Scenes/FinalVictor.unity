@@ -169,15 +169,12 @@ Transform:
   - {fileID: 124193070}
   - {fileID: 1742532792}
   - {fileID: 612616379}
-  - {fileID: 1148314939}
-  - {fileID: 2048580433}
-  - {fileID: 1407053562}
-  - {fileID: 2010182934}
   - {fileID: 521459788}
   - {fileID: 761550278}
   - {fileID: 734214541}
   - {fileID: 1144353064}
   - {fileID: 385067586}
+  - {fileID: 652237046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &46156314
@@ -491,6 +488,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1763961735}
         m_TargetAssemblyTypeName: TimerManager, Assembly-CSharp
         m_MethodName: AccelerateTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 95833439}
+        m_TargetAssemblyTypeName: ButtonLogic, Assembly-CSharp
+        m_MethodName: PlaySingleClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2089,6 +2098,84 @@ Transform:
   - {fileID: 888789245}
   m_Father: {fileID: 45587550}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &652237045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652237046}
+  - component: {fileID: 652237047}
+  m_Layer: 0
+  m_Name: SizePickers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &652237046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652237045}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1148314939}
+  - {fileID: 2048580433}
+  - {fileID: 1407053562}
+  - {fileID: 2010182934}
+  m_Father: {fileID: 45587550}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &652237047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652237045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3769735588ef4b9e97193b1847977de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brushSizeRenderers:
+  - {fileID: 1148314940}
+  - {fileID: 2048580434}
+  - {fileID: 1407053563}
+  - {fileID: 2010182935}
+  brushSizeSelectedRenderers:
+  - {fileID: 21300000, guid: 9ac5752442f52475c92210755f67b027, type: 3}
+  - {fileID: 21300000, guid: 68c8e822672b1496780909f350c228e6, type: 3}
+  - {fileID: 21300000, guid: 57fd2a818e7bd4148accc67f6d9c385c, type: 3}
+  - {fileID: 21300000, guid: 2109d507521724e818cde78488c77451, type: 3}
+  brushSizeUnSelectedRenderers:
+  - {fileID: 21300000, guid: a8cd6a286e2554235acd8c2bd18adeff, type: 3}
+  - {fileID: 21300000, guid: 7aa903255ebb9457ab0b63ced0f950b2, type: 3}
+  - {fileID: 21300000, guid: 08af50a23610b451397f6d977d5ecfe5, type: 3}
+  - {fileID: 21300000, guid: 785bdeb1d534844fa998d5d950c0478a, type: 3}
+  OnBrushSizeSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1021285549}
+        m_TargetAssemblyTypeName: FollowCursor, Assembly-CSharp
+        m_MethodName: UpdateBrushSize
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &654496789
 GameObject:
   m_ObjectHideFlags: 0
@@ -4294,11 +4381,16 @@ PrefabInstance:
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
@@ -4308,7 +4400,17 @@ PrefabInstance:
       objectReference: {fileID: 584127316}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1973862660}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
@@ -4318,12 +4420,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnPaintingChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CompareManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PaintingUpdater, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -4641,6 +4758,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1148314939}
   - component: {fileID: 1148314940}
+  - component: {fileID: 1148314941}
+  - component: {fileID: 1148314942}
   m_Layer: 0
   m_Name: Ellipse 4
   m_TagString: Untagged
@@ -4657,11 +4776,11 @@ Transform:
   m_GameObject: {fileID: 1148314938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.411, y: -1.431, z: 0}
-  m_LocalScale: {x: 0.74855906, y: 0.74855906, z: 0.74855906}
+  m_LocalPosition: {x: 3.4109995, y: -1.4309999, z: 0}
+  m_LocalScale: {x: 0.748559, y: 0.748559, z: 0.748559}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 45587550}
+  m_Father: {fileID: 652237046}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1148314940
 SpriteRenderer:
@@ -4715,6 +4834,70 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1148314941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148314938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517fccb9e84aa4101ba80ee95cbf588f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  brushSize: 5
+  OnBrushSizeSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 652237047}
+        m_TargetAssemblyTypeName: BrushSizeUiHandler, Assembly-CSharp
+        m_MethodName: OnUIClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!58 &1148314942
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148314938}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0032800888, y: 0.0000001192093}
+  serializedVersion: 2
+  m_Radius: 0.23325104
 --- !u!1 &1148838541
 GameObject:
   m_ObjectHideFlags: 0
@@ -5014,8 +5197,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  levelUI: []
-  levelUIObject: {fileID: 0}
+  levelUI:
+  - {fileID: 21300000, guid: 06bb8daf34cf24000be87ed686e88637, type: 3}
+  - {fileID: 0}
+  levelUIObject: {fileID: 1199391286}
 --- !u!1 &1220794444
 GameObject:
   m_ObjectHideFlags: 0
@@ -5205,6 +5390,20 @@ MonoBehaviour:
       Data3: -1357848945
       Data4: -1103272943
     Path: event:/musicOne
+  musicTwo:
+    Guid:
+      Data1: -376608754
+      Data2: 1262458920
+      Data3: -1297221755
+      Data4: -2031892891
+    Path: event:/musicTwo
+  musicThree:
+    Guid:
+      Data1: 1717101866
+      Data2: 1156613708
+      Data3: -670633796
+      Data4: 221665187
+    Path: event:/musicThree
   splooshSound:
     Guid:
       Data1: -94597385
@@ -5226,6 +5425,13 @@ MonoBehaviour:
       Data3: 1440532100
       Data4: 1803785369
     Path: event:/tableDepartureSound
+  singleClickSound:
+    Guid:
+      Data1: -181512701
+      Data2: 1297615896
+      Data3: 1349138563
+      Data4: -784659618
+    Path: event:/singleClickSound
 --- !u!1 &1249255952
 GameObject:
   m_ObjectHideFlags: 0
@@ -6222,6 +6428,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1407053562}
   - component: {fileID: 1407053563}
+  - component: {fileID: 1407053564}
+  - component: {fileID: 1407053565}
   m_Layer: 0
   m_Name: Ellipse 4 (2)
   m_TagString: Untagged
@@ -6238,11 +6446,11 @@ Transform:
   m_GameObject: {fileID: 1407053561}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.325, y: -1.431, z: 0}
-  m_LocalScale: {x: 0.74855906, y: 0.74855906, z: 0.74855906}
+  m_LocalPosition: {x: 5.3249993, y: -1.4309999, z: 0}
+  m_LocalScale: {x: 0.748559, y: 0.748559, z: 0.748559}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 45587550}
+  m_Father: {fileID: 652237046}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1407053563
 SpriteRenderer:
@@ -6296,6 +6504,70 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1407053564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407053561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517fccb9e84aa4101ba80ee95cbf588f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 2
+  brushSize: 20
+  OnBrushSizeSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 652237047}
+        m_TargetAssemblyTypeName: BrushSizeUiHandler, Assembly-CSharp
+        m_MethodName: OnUIClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!58 &1407053565
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407053561}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000047683716, y: 0.00000011920929}
+  serializedVersion: 2
+  m_Radius: 0.26499996
 --- !u!1 &1407317017
 GameObject:
   m_ObjectHideFlags: 0
@@ -8342,8 +8614,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeEffectController: {fileID: 1973862659}
   paintings:
+  - {fileID: 21300000, guid: 63fc26f678d8d495d8c266c51d41497d, type: 3}
   - {fileID: 21300000, guid: aecad29833c7444e8bd1db355f0f4189, type: 3}
-  - {fileID: 21300000, guid: aecad29833c7444e8bd1db355f0f4189, type: 3}
+  paintingCopy: []
 --- !u!1 &1990604997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8403,6 +8676,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2010182934}
   - component: {fileID: 2010182935}
+  - component: {fileID: 2010182936}
+  - component: {fileID: 2010182937}
   m_Layer: 0
   m_Name: Ellipse 4 (3)
   m_TagString: Untagged
@@ -8419,11 +8694,11 @@ Transform:
   m_GameObject: {fileID: 2010182933}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.387, y: -1.431, z: 0}
-  m_LocalScale: {x: 0.74855906, y: 0.74855906, z: 0.74855906}
+  m_LocalPosition: {x: 6.387, y: -1.4309999, z: 0}
+  m_LocalScale: {x: 0.748559, y: 0.748559, z: 0.748559}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 45587550}
+  m_Father: {fileID: 652237046}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2010182935
 SpriteRenderer:
@@ -8477,6 +8752,70 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2010182936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010182933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517fccb9e84aa4101ba80ee95cbf588f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
+  brushSize: 40
+  OnBrushSizeSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 652237047}
+        m_TargetAssemblyTypeName: BrushSizeUiHandler, Assembly-CSharp
+        m_MethodName: OnUIClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!58 &2010182937
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010182933}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.00000011920929}
+  serializedVersion: 2
+  m_Radius: 0.35999998
 --- !u!1 &2048580432
 GameObject:
   m_ObjectHideFlags: 0
@@ -8487,6 +8826,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2048580433}
   - component: {fileID: 2048580434}
+  - component: {fileID: 2048580436}
+  - component: {fileID: 2048580435}
   m_Layer: 0
   m_Name: Ellipse 4 (1)
   m_TagString: Untagged
@@ -8503,11 +8844,11 @@ Transform:
   m_GameObject: {fileID: 2048580432}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.311, y: -1.431, z: 0}
-  m_LocalScale: {x: 0.74855906, y: 0.74855906, z: 0.74855906}
+  m_LocalPosition: {x: 4.311, y: -1.4309999, z: 0}
+  m_LocalScale: {x: 0.748559, y: 0.748559, z: 0.748559}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 45587550}
+  m_Father: {fileID: 652237046}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2048580434
 SpriteRenderer:
@@ -8561,6 +8902,70 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2048580435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048580432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517fccb9e84aa4101ba80ee95cbf588f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  brushSize: 10
+  OnBrushSizeSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 652237047}
+        m_TargetAssemblyTypeName: BrushSizeUiHandler, Assembly-CSharp
+        m_MethodName: OnUIClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!58 &2048580436
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048580432}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000047683716, y: 0.00000011920929}
+  serializedVersion: 2
+  m_Radius: 0.18999998
 --- !u!1 &2054141846
 GameObject:
   m_ObjectHideFlags: 0
@@ -8869,6 +9274,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1021285549}
         m_TargetAssemblyTypeName: FollowCursor, Assembly-CSharp
         m_MethodName: ResetTexture
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2124443830}
+        m_TargetAssemblyTypeName: ButtonLogic, Assembly-CSharp
+        m_MethodName: PlaySingleClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

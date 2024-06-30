@@ -29,6 +29,17 @@ public class PaintingParser : MonoBehaviour
             ParseSpriteColors();
         }
     }
+    
+    private void ResetAll()
+    {
+        closestDistanceToRed = float.MaxValue;
+        closestDistanceToBlue = float.MaxValue;
+        closestDistanceToYellow = float.MaxValue;
+
+        closestToRedColor = Color.black;
+        closestToBlueColor = Color.black;
+        closestToYellowColor = Color.black;
+    }
 
     void ParseSpriteColors()
     {
@@ -55,6 +66,18 @@ public class PaintingParser : MonoBehaviour
         onColorParsedEvent.Raise(redColor);
         onColorParsedEvent.Raise(yellowColor);
         onColorParsedEvent.Raise(blueColor);
+    }
+    
+    public void parsePainting()
+    {
+        if (spriteRenderer.sprite == null)
+        {
+            Debug.Log("No sprite found");
+            return;
+        }
+        ResetAll();
+        sprite = spriteRenderer.sprite;
+        ParseSpriteColors();
     }
 
     private void GetClosestColor(Color newColor)
@@ -84,11 +107,6 @@ public class PaintingParser : MonoBehaviour
             closestDistanceToYellow = distanceToYellow;
             closestToYellowColor = newColor;
         }
-    }
-
-    public void ChangePainting()
-    {
-        
     }
 
     private float ColorDistance(Color c1, Color c2)

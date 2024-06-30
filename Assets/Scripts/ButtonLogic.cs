@@ -35,4 +35,9 @@ public class ButtonLogic : MonoBehaviour
     {
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.splooshSound, transform.position);
     }
+
+    public void PlaySingleClickSound()
+    {
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.singleClickSound, transform.position);
+    }
 }

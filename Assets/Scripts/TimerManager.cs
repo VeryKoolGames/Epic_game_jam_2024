@@ -16,7 +16,7 @@ public class TimerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.musicOne, transform.position);
+        // AudioManager.Instance.PlayOneShot(FmodEvents.Instance.musicOne, transform.position);
         UpdateTimerUI();
         baseTimeToFinish = timeToFinish;
     }

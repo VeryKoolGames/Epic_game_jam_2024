@@ -21,6 +21,7 @@ public class FollowCursor : MonoBehaviour
     private Vector2Int textureSize;
     private int id;
     private EventInstance smallBrushSound;
+    private int brushSize = 20;
 
     private void Awake()
     {
@@ -39,6 +40,11 @@ public class FollowCursor : MonoBehaviour
     private void Start()
     {
         smallBrushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.smallBrushSound);
+    }
+
+    public void UpdateBrushSize(int size)
+    {
+        brushSize = size;
     }
 
     public void ResetTexture()
@@ -117,7 +123,7 @@ public class FollowCursor : MonoBehaviour
         Vector2 localPoint;
         if (GetMousePixelPosition(out localPoint))
         {
-            PaintPixels(localPoint, currentPaintColor, 20);
+            PaintPixels(localPoint, currentPaintColor, brushSize);
         }
     }
     
