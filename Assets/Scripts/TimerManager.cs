@@ -14,6 +14,7 @@ public class TimerManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private UnityEvent onTimerEnd;
     private bool isDelay = true;
+    private bool isTimerRunning = true;
     // [SerializeField] private CanvasSaver canvasSaver;
     // Start is called before the first frame update
     // void Start()
@@ -30,6 +31,17 @@ public class TimerManager : MonoBehaviour
         UpdateTimerUI();
         StartCoroutine(delayStart());
     }
+    
+    public void StartTimer()
+    {
+        isTimerRunning = true;
+    }
+    
+    public void StopTimer()
+    {
+        baseTimeToFinish = timeToFinish;
+        isTimerRunning = false;
+    }
 
     IEnumerator delayStart()
     {
@@ -39,7 +51,7 @@ public class TimerManager : MonoBehaviour
 
     void Update()
     {
-        if (isDelay)
+        if (isDelay || !isTimerRunning)
         {
             return;
         }

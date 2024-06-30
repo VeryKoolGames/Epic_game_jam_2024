@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &45587550
 Transform:
   m_ObjectHideFlags: 0
@@ -934,6 +934,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &297480819 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6234270324530827542, guid: 27e3450cdddb24e29a83996dee84e948,
+    type: 3}
+  m_PrefabInstance: {fileID: 1289920437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &335440617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8664431231183590143, guid: aecaf9d4fec0f4deb9d09abe3993614a,
@@ -1090,7 +1096,16 @@ MonoBehaviour:
   - {fileID: 834597438}
   - {fileID: 1370288686}
   - {fileID: 475892971}
+  - {fileID: 297480819}
+  - {fileID: 1979042679}
+  - {fileID: 388927439}
   onColorSpawnedListener: {fileID: 385067587}
+--- !u!1 &388927439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 881595696798768445, guid: 27e3450cdddb24e29a83996dee84e948,
+    type: 3}
+  m_PrefabInstance: {fileID: 1289920437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &399948999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,8 +1205,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
         type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1021285554}
+    - target: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetIsMouseInZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Palette, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526699126193483007, guid: aecaf9d4fec0f4deb9d09abe3993614a,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3083637519701871343, guid: aecaf9d4fec0f4deb9d09abe3993614a,
         type: 3}
@@ -2979,6 +3019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onColorChoiceListener: {fileID: 1021285550}
   spriteRenderer: {fileID: 441817639}
+  paintingParser: {fileID: 385067588}
 --- !u!1 &1029987745
 GameObject:
   m_ObjectHideFlags: 0
@@ -3619,7 +3660,7 @@ PrefabInstance:
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
@@ -3629,6 +3670,11 @@ PrefabInstance:
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
@@ -3643,12 +3689,22 @@ PrefabInstance:
       objectReference: {fileID: 1973862660}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1021285549}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
@@ -3663,6 +3719,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ResetTexture
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CompareManager, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -3673,12 +3734,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: FollowCursor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
         type: 3}
       propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122470321943898838, guid: eff66d562b9a041248010e81777a458a,
+        type: 3}
+      propertyPath: onTimerEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -6359,6 +6430,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1021285549}
+        m_TargetAssemblyTypeName: FollowCursor, Assembly-CSharp
+        m_MethodName: ResetTexture
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &1901030480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7056,6 +7139,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 63fc26f678d8d495d8c266c51d41497d, type: 3}
   - {fileID: 21300000, guid: aecad29833c7444e8bd1db355f0f4189, type: 3}
   paintingCopy: []
+--- !u!1 &1979042679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2535967587622632749, guid: 27e3450cdddb24e29a83996dee84e948,
+    type: 3}
+  m_PrefabInstance: {fileID: 1289920437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1990604997
 GameObject:
   m_ObjectHideFlags: 0
