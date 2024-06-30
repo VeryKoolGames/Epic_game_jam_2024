@@ -20,8 +20,6 @@ public class CompareManager : MonoBehaviour
     {
         paintToCopy = paintingParser.GetPaintColors();
         paintFinal = followCursor.GetAllPixels();
-        Debug.Log(paintFinal.Length);
-        Debug.Log(paintToCopy.Length);
         
         nCorrect = paintFinal.Where((x, i) => ColorsAreSimilar(x, paintToCopy[i])).Count();
         compensation = HasPlayed() ? 5 : 0; // added 5% more to be happy
@@ -34,8 +32,6 @@ public class CompareManager : MonoBehaviour
     {
         paintToCopy = paintingParser.GetPaintColors();
         paintFinal = followCursor.GetAllPixels();
-        Debug.Log(paintFinal.Length);
-        Debug.Log(paintToCopy.Length);
         
         nCorrect = paintFinal.Where((x, i) => ColorsAreSimilar(x, paintToCopy[i])).Count();
         compensation = HasPlayed() ? 5 : 0; // added 5% more to be happy

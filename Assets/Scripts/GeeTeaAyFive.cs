@@ -64,7 +64,6 @@ public class GeeTeeAyFive : MonoBehaviour {
 
   public void ClickedTile() {
     // Don't allow left clicks on flags.
-    Debug.Log("Up");
     if (active & !flagged) {
       // Ensure it can no longer be pressed again.
       active = false;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,10 @@ public class PaintingParser : MonoBehaviour
     void Start()
     {
         sprite = spriteRenderer.sprite;
-        if (sprite != null)
-        {
-            ParseSpriteColors();
-        }
+        // if (sprite != null)
+        // {
+        //     ParseSpriteColors();
+        // }
     }
     
     public void ResetAll()
@@ -49,6 +50,11 @@ public class PaintingParser : MonoBehaviour
         closestToRedColor = Color.black;
         closestToBlueColor = Color.black;
         closestToYellowColor = Color.black;
+    }
+
+    private void OnDisable()
+    {
+        ResetAll();
     }
 
     void ParseSpriteColors()
@@ -147,6 +153,7 @@ public class PaintingParser : MonoBehaviour
     
     public void parsePainting()
     {
+        Debug.Log("Parsing painting");
         if (spriteRenderer.sprite == null)
         {
             Debug.Log("No sprite found");

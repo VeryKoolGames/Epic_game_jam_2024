@@ -13,7 +13,6 @@ public class BrushSizeUiHandler : MonoBehaviour
 
     public void OnUIClicked(int id, int brushSize)
     {
-        Debug.Log("Brush size clicked " + id);
         for (int i = 0; i < brushSizeRenderers.Length; i++)
         {
             if (i == id)

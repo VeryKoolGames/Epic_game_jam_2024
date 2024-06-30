@@ -10,10 +10,6 @@ public class StoreColorPick : MonoBehaviour
     public Color color;
     [SerializeField] private OnColorChoiceEvent onColorChoiceEvent;
 
-    public void Start()
-    {
-        color = GetComponent<SpriteRenderer>().color;
-    }
 
     public bool IsOccupied
     {
@@ -22,7 +18,6 @@ public class StoreColorPick : MonoBehaviour
     }
     public void OnColorPick()
     {
-        if (isOccupied)
-            onColorChoiceEvent.Raise(color);
+        onColorChoiceEvent.Raise(color);
     }
 }
