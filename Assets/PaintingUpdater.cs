@@ -15,7 +15,6 @@ public class PaintingUpdater : MonoBehaviour
     private void OnEnable()
     {
         paintingCopy = new List<Sprite>(paintings);
-        Debug.Log("Lenghhht " + paintingCopy.Count);
         fadeEffectController.FirstFade(GetRandomPainting());
     }
     
