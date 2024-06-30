@@ -75,6 +75,7 @@ public class PaintColorManager : MonoBehaviour
 
     public void SetColor(Color color)
     {
+        Debug.Log("Setting color: " + color);
         foreach (var button in colorPickingButtons)
         {
             StoreColorPick storeColorPick = button.GetComponent<StoreColorPick>();

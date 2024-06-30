@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using DefaultNamespace;
-using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Palette : MonoBehaviour
@@ -20,6 +16,7 @@ public class Palette : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Texture2D texture;
     private Vector2Int textureSize;
+    private Color[] basePixels;
     private int id;
     [SerializeField] private PaintColorManager paintingParser;
 
@@ -27,6 +24,7 @@ public class Palette : MonoBehaviour
     {
         texture = new Texture2D(spriteRenderer.sprite.texture.width, spriteRenderer.sprite.texture.height, spriteRenderer.sprite.texture.format, false);
         Graphics.CopyTexture(spriteRenderer.sprite.texture, texture);
+        basePixels = texture.GetPixels();
 
         if (!texture.isReadable)
         {
@@ -36,6 +34,12 @@ public class Palette : MonoBehaviour
         textureSize = new Vector2Int(texture.width, texture.height);
         spriteRenderer.sprite = Sprite.Create(texture, spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f));
         onColorChoiceListener.Response.AddListener(SetCurrentColor);
+    }
+    
+    public void ResetTexture()
+    {
+        texture.SetPixels(basePixels);
+        texture.Apply();
     }
     
     public void SetCurrentColor(Color color)

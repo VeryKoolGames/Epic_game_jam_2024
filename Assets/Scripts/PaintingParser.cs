@@ -50,6 +50,7 @@ public class PaintingParser : MonoBehaviour
     void ParseSpriteColors()
     {
         Texture2D texture = sprite.texture;
+        colors = texture.GetPixels();
         List<Color> dominantColors = GetDominantColors(texture, 7);
         
         foreach (Color color in dominantColors)

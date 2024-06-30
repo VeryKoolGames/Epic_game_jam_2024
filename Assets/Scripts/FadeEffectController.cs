@@ -11,6 +11,7 @@ public class FadeEffectController : MonoBehaviour
     private bool startFade = false;
     private bool fadeOut = true; // Determines the direction of the fade
     private int fadeSteps = 2;
+    [SerializeField] private PaintingParser paintingParser;
 
     private void OnEnable()
     {
@@ -46,6 +47,7 @@ public class FadeEffectController : MonoBehaviour
         yield return new WaitForSeconds(1);
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.tableauDeparture, transform.position);
         paintingRenderer.sprite = painting;
+        paintingParser.parsePainting();
         StartFadeIn();
     }
 

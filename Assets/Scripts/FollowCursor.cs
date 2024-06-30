@@ -67,6 +67,7 @@ public class FollowCursor : MonoBehaviour
     
     public void SetCurrentColor(Color color)
     {
+        Debug.Log("Setting current color");
         hasBlended = false;
         currentPaintColor = color;
     }
@@ -122,6 +123,7 @@ public class FollowCursor : MonoBehaviour
         Vector2 localPoint;
         if (GetMousePixelPosition(out localPoint))
         {
+            Debug.Log("Painting");
             PaintPixels(localPoint, currentPaintColor, brushSize);
         }
     }
@@ -170,7 +172,6 @@ public class FollowCursor : MonoBehaviour
             }
         }
         texture.Apply();
-        Debug.Log(texture.GetPixels().Length);
     }
     
     private Color BlendColors(Color color1, Color color2)

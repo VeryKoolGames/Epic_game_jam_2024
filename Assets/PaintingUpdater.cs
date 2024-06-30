@@ -10,7 +10,7 @@ public class PaintingUpdater : MonoBehaviour
     [SerializeField] private FadeEffectController fadeEffectController;
     [SerializeField] private List<Sprite> paintings = new List<Sprite>();
     [SerializeField] private List<Sprite> paintingCopy = new List<Sprite>();
-    [SerializeField] private List<EventInstance> mainMusics = new List<EventInstance>();
+    private List<EventInstance> mainMusics = new List<EventInstance>();
     private EventInstance currentMusic;
     private int currentPaintingIndex = 0;
     // Start is called before the first frame update
@@ -37,8 +37,8 @@ public class PaintingUpdater : MonoBehaviour
         {
             return null;
         }
-
-        currentPaintingIndex++;
+        if (currentPaintingIndex < mainMusics.Count - 1)
+            currentPaintingIndex++;
         currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
         mainMusics[currentPaintingIndex].start();
         currentMusic = mainMusics[currentPaintingIndex];
