@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PaintingUpdater : MonoBehaviour
 {
@@ -9,17 +11,23 @@ public class PaintingUpdater : MonoBehaviour
     [SerializeField] private List<Sprite> paintingCopy = new List<Sprite>();
     private int currentPaintingIndex = 0;
     // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
-        paintingCopy = paintings;
+        paintingCopy = new List<Sprite>(paintings);
+        Debug.Log("Lenghhht " + paintingCopy.Count);
         fadeEffectController.FirstFade(GetRandomPainting());
     }
     
+    private void CopyPaintings()
+    {
+        paintingCopy = new List<Sprite>(paintings);
+    }
+
     private Sprite GetRandomPainting()
     {
         if (paintingCopy.Count == 0)
         {
-            Debug.Log("No more paintings to show!");
             return null;
         }
         Sprite RandomSprite = paintingCopy[Random.Range(0, paintingCopy.Count)];
@@ -30,5 +38,10 @@ public class PaintingUpdater : MonoBehaviour
     public void OnPaintingChange()
     {
         fadeEffectController.FadePainting(GetRandomPainting());
+    }
+
+    private void OnDisable()
+    {
+        paintingCopy = paintings;
     }
 }

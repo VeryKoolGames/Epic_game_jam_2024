@@ -20,12 +20,18 @@ public class FadeEffectController : MonoBehaviour
 
     public void FirstFade(Sprite painting)
     {
-        fadeAmount = 1.0f; // Ensure fade starts from black
+        fadeAmount = 1.0f;
         fadeMaterial.SetFloat("_SetBlack", 1.0f);
         fadeMaterial.SetFloat("_Fade", fadeAmount);
 
         paintingRenderer.sprite = painting;
 
+        StartCoroutine(delayStart());
+    }
+    
+    IEnumerator delayStart()
+    {
+        yield return new WaitForSeconds(1);
         StartFadeIn();
     }
 

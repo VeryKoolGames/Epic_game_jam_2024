@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,17 +13,36 @@ public class TimerManager : MonoBehaviour
     [SerializeField] private int currentSpeed = 1;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private UnityEvent onTimerEnd;
+    private bool isDelay = true;
     // [SerializeField] private CanvasSaver canvasSaver;
     // Start is called before the first frame update
-    void Start()
+    // void Start()
+    // {
+    //     UpdateTimerUI();
+    //     baseTimeToFinish = timeToFinish;
+    //     StartCoroutine(delayStart());
+    // }
+
+    private void OnEnable()
     {
-        // AudioManager.Instance.PlayOneShot(FmodEvents.Instance.musicOne, transform.position);
-        UpdateTimerUI();
         baseTimeToFinish = timeToFinish;
+        currentSpeed = 1;
+        UpdateTimerUI();
+        StartCoroutine(delayStart());
+    }
+
+    IEnumerator delayStart()
+    {
+        yield return new WaitForSeconds(2);
+        isDelay = false;
     }
 
     void Update()
     {
+        if (isDelay)
+        {
+            return;
+        }
         timeToFinish -= Time.deltaTime * currentSpeed;
         if (timeToFinish <= 0)
         {
@@ -49,5 +69,12 @@ public class TimerManager : MonoBehaviour
     public void AccelerateTimer()
     {
         currentSpeed = 60;
+    }
+
+    private void OnDisable()
+    {
+        timeToFinish = baseTimeToFinish;
+        currentSpeed = 1;
+        UpdateTimerUI();
     }
 }
