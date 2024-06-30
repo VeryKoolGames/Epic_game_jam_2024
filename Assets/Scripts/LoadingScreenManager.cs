@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using FMOD.Studio;
 using UnityEngine;
 
 public class LoadingScreenManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] loadingSegments;
     [SerializeField] private GameObject gameWindow;
+    private EventInstance loadingSound;
+
     // Start is called before the first frame update
     void OnEnable()
     {
+        loadingSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.loadingSound);
+        loadingSound.start();
         transform.localScale = Vector3.zero;
         transform.DOScale(1f, .2f).OnComplete((() => StartCoroutine(StartLoading())));
     }
@@ -30,6 +35,7 @@ public class LoadingScreenManager : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(transform.DOScale(0f, .2f).OnComplete(() =>
         {
+            loadingSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             gameWindow.SetActive(true);
             gameWindow.transform.localScale = Vector3.zero;
         }));

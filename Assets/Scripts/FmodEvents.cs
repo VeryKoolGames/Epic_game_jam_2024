@@ -13,10 +13,12 @@ public class FmodEvents : MonoBehaviour
     public EventReference musicOne;
     public EventReference musicTwo;
     public EventReference musicThree;
+    public EventReference loadingSound;
     public EventReference splooshSound;
     public EventReference tableauArrival;
     public EventReference tableauDeparture;
     public EventReference singleClickSound;
+    public EventReference welcomeSound;
 
     private void Awake()
     {

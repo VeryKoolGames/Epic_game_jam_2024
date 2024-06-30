@@ -8,6 +8,7 @@ public class GameSceneManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameWindow;
     [SerializeField] private GameObject loadingWindow;
+    [SerializeField] private GameObject creditWindow;
 
     [SerializeField] private UnityEvent onGameSceneClosed;
     // Start is called before the first frame update
@@ -26,6 +27,11 @@ public class GameSceneManager : MonoBehaviour
             gameWindow.SetActive(false);
             gameWindow.transform.localScale = gameWindowScale;
         });
+    }
+
+    public void LauchCreditScene()
+    {
+        creditWindow.SetActive(true);
     }
     
 }

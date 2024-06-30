@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +11,11 @@ public class FadeEffectController : MonoBehaviour
     private bool startFade = false;
     private bool fadeOut = true; // Determines the direction of the fade
     private int fadeSteps = 2;
+
+    private void OnEnable()
+    {
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.welcomeSound, transform.position);
+    }
 
     public void FadePainting(Sprite painting)
     {
