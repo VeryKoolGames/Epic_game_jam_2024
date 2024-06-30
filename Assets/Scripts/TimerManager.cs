@@ -15,6 +15,7 @@ public class TimerManager : MonoBehaviour
     [SerializeField] private UnityEvent onTimerEnd;
     [SerializeField] private UnityEvent onTimerRestart;
     [SerializeField] private GameObject finishPopUp;
+    [SerializeField] private GameObject finalPopUp;
     private bool isDelay = true;
     private bool isTimerRunning = true;
     private int countPainting;
@@ -59,6 +60,10 @@ public class TimerManager : MonoBehaviour
             StopTimer();
             if (countPainting < 2)
                 finishPopUp.SetActive(true);
+            else
+            {
+                finalPopUp.SetActive(true);
+            }
             onTimerEnd.Invoke();
         }
         UpdateTimerUI();
