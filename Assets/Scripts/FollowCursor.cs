@@ -67,7 +67,6 @@ public class FollowCursor : MonoBehaviour
     
     public void SetCurrentColor(Color color)
     {
-        Debug.Log("Setting color to: " + color);
         hasBlended = false;
         currentPaintColor = color;
     }

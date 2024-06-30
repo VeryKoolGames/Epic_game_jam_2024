@@ -13,7 +13,7 @@ public class Palette : MonoBehaviour
     private ColorsEnum currentColor = ColorsEnum.WHITE;
     private Color currentPaintColor = Color.white;
     private Color lastMix;
-    private Color[] selectedColors = new Color[20];
+    private List<Color> selectedColors = new List<Color>();
     private int index = 0;
     [SerializeField] private OnColorChoiceListener onColorChoiceListener;
     private bool hasBlended;
@@ -21,6 +21,7 @@ public class Palette : MonoBehaviour
     private Texture2D texture;
     private Vector2Int textureSize;
     private int id;
+    [SerializeField] private PaintColorManager paintingParser;
 
     private void Start()
     {
@@ -43,9 +44,9 @@ public class Palette : MonoBehaviour
         currentPaintColor = color;
         if (selectedColors.Contains(color) == false)
         {
-            selectedColors[index] = color;
-            index++;
+            selectedColors.Add(color);
         } 
+        Debug.Log(selectedColors.Count);
     }
 
     void Update()
@@ -62,6 +63,7 @@ public class Palette : MonoBehaviour
         {
             isMouseButtonDown = false;
             hasBlended = false;
+            lastMix = Color.black;
         }
         if (isMouseButtonDown)
         {
@@ -139,17 +141,20 @@ public class Palette : MonoBehaviour
 
                     if (pixelX >= 0 && pixelX < textureSize.x && pixelY >= 0 && pixelY < textureSize.y)
                     {
-                        if (hasBlended)
-                        {
-                            texture.SetPixel(pixelX, pixelY, lastMix);
-                            continue;
-                        }
-                        
                         Color mix = color;
-                        if (selectedColors.Contains(texture.GetPixel(pixelX, pixelY)))
+                        if (!hasBlended)
                         {
                             mix = BlendColors(pixelX, pixelY, color);
                             lastMix = mix;
+                            paintingParser.TryToUnlockColor(mix);
+                        }
+                        else if (lastMix != Color.black)
+                        {
+                            mix = lastMix;
+                        }
+                        else
+                        {
+                            mix = color;
                         }
 
                         texture.SetPixel(pixelX, pixelY, mix);
