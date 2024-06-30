@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -11,6 +12,11 @@ public class PaintingParser : MonoBehaviour
     public Color redColor;
     public Color blueColor;
     public Color yellowColor; // Changed from green to yellow
+    public Color defaultColor = new Color(0, 0, 0, 0);
+    public Color unlockColor1;
+    public Color unlockColor2;
+    public Color unlockColor3;
+    public Color unlockColor4;
     [SerializeField] private OnColorParsedEvent onColorParsedEvent;
 
     private float closestDistanceToRed = float.MaxValue;
@@ -44,28 +50,90 @@ public class PaintingParser : MonoBehaviour
     void ParseSpriteColors()
     {
         Texture2D texture = sprite.texture;
-
-        colors = texture.GetPixels((int)sprite.textureRect.x,
-            (int)sprite.textureRect.y,
-            (int)sprite.textureRect.width,
-            (int)sprite.textureRect.height);
-
-        foreach (Color color in colors)
+        List<Color> dominantColors = GetDominantColors(texture, 7);
+        
+        foreach (Color color in dominantColors)
         {
             GetClosestColor(color);
+        }
+        foreach (Color color in dominantColors)
+        {
+            getLastColorToUnlock(color);
         }
 
         redColor = closestToRedColor;
         blueColor = closestToBlueColor;
         yellowColor = closestToYellowColor;
 
-        Debug.Log("Red: " + redColor);
-        Debug.Log("Yellow: " + yellowColor);
-        Debug.Log("Blue: " + blueColor);
-
         onColorParsedEvent.Raise(redColor);
         onColorParsedEvent.Raise(yellowColor);
         onColorParsedEvent.Raise(blueColor);
+        onColorParsedEvent.Raise(unlockColor1);
+        onColorParsedEvent.Raise(unlockColor2);
+        onColorParsedEvent.Raise(unlockColor3);
+        onColorParsedEvent.Raise(unlockColor4);
+    }
+
+    private List<Color> GetDominantColors(Texture2D tex, int numberOfColors)
+    {
+        Color[] pixels = tex.GetPixels();
+
+        // Convert colors to a simplified form to reduce the number of unique colors
+        List<Color> colorList = new List<Color>();
+        foreach (Color pixel in pixels)
+        {
+            colorList.Add(new Color(
+                Mathf.Round(pixel.r * 10) / 10.0f,
+                Mathf.Round(pixel.g * 10) / 10.0f,
+                Mathf.Round(pixel.b * 10) / 10.0f,
+                pixel.a));
+        }
+
+        // Group by color and count occurrences
+        var colorGroups = colorList.GroupBy(color => color).OrderByDescending(group => group.Count()).Take(numberOfColors);
+
+        // Return the most frequent colors
+        return colorGroups.Select(group => group.Key).ToList();
+    }
+
+    private void getLastColorToUnlock(Color newColor)
+    {
+        if (newColor == closestToRedColor)
+        {
+            return;
+        }
+        if (newColor == closestToBlueColor)
+        {
+            return;
+        }
+        if (newColor == closestToYellowColor)
+        {
+            return;
+        }
+        
+        if (unlockColor1 == defaultColor)
+        {
+            unlockColor1 = newColor;
+            return;
+        }
+        
+        if (unlockColor2 == defaultColor)
+        {
+            unlockColor2 = newColor;
+            return;
+        }
+        
+        if (unlockColor3 == defaultColor)
+        {
+            unlockColor3 = newColor;
+            return;
+        }
+        
+        if (unlockColor4 == defaultColor)
+        {
+            unlockColor4 = Color.white;
+            return;
+        }
     }
     
     public void parsePainting()
@@ -101,7 +169,7 @@ public class PaintingParser : MonoBehaviour
             closestToBlueColor = newColor;
         }
 
-        float distanceToYellow = ColorDistance(newColor, new Color(1.0f, 1.0f, 0.0f));
+        float distanceToYellow = ColorDistance(newColor, new Color32( 255 , 230 , 153 , 255 ));
         if (distanceToYellow < closestDistanceToYellow)
         {
             closestDistanceToYellow = distanceToYellow;
