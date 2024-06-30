@@ -26,13 +26,14 @@ public class LoadingScreenManager : MonoBehaviour
 
     private void LaunchGameScene()
     {
+        Vector3 gameWindowScale = gameWindow.transform.localScale;
         var sequence = DOTween.Sequence();
         sequence.Append(transform.DOScale(0f, .2f).OnComplete(() =>
         {
             gameWindow.SetActive(true);
             gameWindow.transform.localScale = Vector3.zero;
         }));
-        sequence.Append(gameWindow.transform.DOScale(1f, .2f).OnComplete(() =>
+        sequence.Append(gameWindow.transform.DOScale(gameWindowScale, .2f).OnComplete(() =>
         {
             ResetGameObjects();
             gameObject.SetActive(false);

@@ -4,6 +4,8 @@ Shader "Custom/OldTVFade"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Fade ("Fade Amount", Range(0, 1)) = 0.0
+        _SetBlack ("Set Black", Range(0, 1)) = 0.0
+        _Steps ("Fade Steps", Range(1, 100)) = 20
     }
     SubShader
     {
@@ -33,6 +35,8 @@ Shader "Custom/OldTVFade"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float _Fade;
+            float _SetBlack;
+            float _Steps;
 
             v2f vert (appdata_t v)
             {
@@ -48,9 +52,17 @@ Shader "Custom/OldTVFade"
                 fixed4 col = tex2D(_MainTex, uv);
 
                 // Calculate the fade effect
-                if (uv.y < _Fade)
+                if (_SetBlack > 0.5)
                 {
                     col.rgb = 0;
+                }
+                else
+                {
+                    float stepFade = floor(_Fade * _Steps) / _Steps;
+                    if (uv.y < stepFade)
+                    {
+                        col.rgb = 0;
+                    }
                 }
 
                 return col;

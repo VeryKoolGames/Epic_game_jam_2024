@@ -19,10 +19,12 @@ public class GameSceneManager : MonoBehaviour
     
     public void CloseGameWindow()
     {
+        Vector3 gameWindowScale = gameWindow.transform.localScale;
         gameWindow.transform.DOScale(0f, .2f).OnComplete(() =>
         {
             onGameSceneClosed.Invoke();
             gameWindow.SetActive(false);
+            gameWindow.transform.localScale = gameWindowScale;
         });
     }
     
