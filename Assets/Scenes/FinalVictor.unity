@@ -8650,6 +8650,7 @@ MonoBehaviour:
   - Pretty good
   - Amazing score well done
   compareManager: {fileID: 584127316}
+  percentageText: {fileID: 142457577}
 --- !u!4 &1474553435 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2788140995294007013, guid: eff66d562b9a041248010e81777a458a,
