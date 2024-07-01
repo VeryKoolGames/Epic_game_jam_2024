@@ -9,10 +9,8 @@ using UnityEngine;
 public class FollowCursor : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private GridStateManager gridStateManager;
     private bool isMouseInZone;
     private bool isMouseButtonDown;
-    private ColorsEnum currentColor = ColorsEnum.WHITE;
     private Color currentPaintColor = Color.white;
     [SerializeField] private OnColorChoiceListener onColorChoiceListener;
     private bool hasBlended;
@@ -75,13 +73,6 @@ public class FollowCursor : MonoBehaviour
     public void ResetTexture()
     {
         texture.SetPixels(originalPixels);
-        // Color[] whitePixels = new Color[t(extureSize.x * textureSize.y];
-        // for (int i = 0; i < whitePixels.Length; i++)
-        // {
-        //     whitePixels[i] = Color.white;
-        // }
-        //
-        // texture.SetPixels(whitePixels); /)/ Set all pixels to white
         texture.Apply();
     }
     
@@ -231,11 +222,5 @@ public class FollowCursor : MonoBehaviour
             brushSound.stop(STOP_MODE.IMMEDIATE);
         }
         isMouseInZone = value;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 0.45f);
     }
 }

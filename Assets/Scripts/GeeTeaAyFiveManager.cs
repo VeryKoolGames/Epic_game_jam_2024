@@ -33,7 +33,7 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
   private void Start()
   {
     baseScale = transform.localScale;
-    Debug.Log("sclale: " + baseScale);
+    // Debug.Log("sclale: " + baseScale);
   }
 
   private void OnEnable()
@@ -75,7 +75,7 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
     for (int row = 0; row < height; row++) {
       for (int col = 0; col < width; col++) {
         // Position the tile in the correct place (centred).
-        Debug.Log("Creating tile");
+        // Debug.Log("Creating tile");
         Transform tileTransform = Instantiate(tilePrefab, geeTeeAyFiveHolder, true);
         float xIndex = col - ((width - 1) / 2.0f);
         float yIndex = row - ((height - 1) / 2.0f);

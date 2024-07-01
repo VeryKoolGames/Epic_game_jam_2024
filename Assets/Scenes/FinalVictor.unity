@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1895,7 +1895,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  testColor: {r: 0, g: 0, b: 0, a: 0}
   zoneCollider: {fileID: 0}
 --- !u!1 &385067585 stripped
 GameObject:
@@ -4546,7 +4545,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  testColor: {r: 0, g: 0, b: 0, a: 0}
   zoneCollider: {fileID: 734214542}
 --- !u!1 &747744912
 GameObject:
@@ -6888,6 +6886,7 @@ PrefabInstance:
     - {fileID: 8681101351739411474, guid: eff66d562b9a041248010e81777a458a, type: 3}
     - {fileID: 4644491789236200625, guid: eff66d562b9a041248010e81777a458a, type: 3}
     - {fileID: 7747843301047901179, guid: eff66d562b9a041248010e81777a458a, type: 3}
+    - {fileID: 7591041908131104821, guid: eff66d562b9a041248010e81777a458a, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2788140995294007013, guid: eff66d562b9a041248010e81777a458a,
         type: 3}

@@ -9,7 +9,6 @@ public class Palette : MonoBehaviour
     private Color currentPaintColor = Color.white;
     private Color lastMix;
     private List<Color> selectedColors = new List<Color>();
-    private int index = 0;
     [SerializeField] private OnColorChoiceListener onColorChoiceListener;
     private bool hasBlended;
     [SerializeField] private SpriteRenderer spriteRenderer;

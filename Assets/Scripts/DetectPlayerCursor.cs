@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class DetectPlayerCursor : MonoBehaviour
 {
     [SerializeField] private UnityEvent<bool> onZoneEnter;
-    [SerializeField] private Color testColor;
     [SerializeField] private Collider2D zoneCollider;
     private bool isMouseInZone;
 
