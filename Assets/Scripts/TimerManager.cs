@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,14 +20,17 @@ public class TimerManager : MonoBehaviour
     private bool isDelay = true;
     private bool isTimerRunning = true;
     private int countPainting;
+    private EventInstance accelerateSound;
 
     private void OnEnable()
     {
+        countPainting = 0;
         isTimerRunning = true;
         baseTimeToFinish = timeToFinish;
         currentSpeed = 1;
         UpdateTimerUI();
         StartCoroutine(delayStart());
+        accelerateSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.accelerateSound);
     }
     
     public void StartTimer()
@@ -56,6 +60,10 @@ public class TimerManager : MonoBehaviour
         timeToFinish -= Time.deltaTime * currentSpeed;
         if (timeToFinish <= 0)
         {
+            if (currentSpeed == 60)
+            {
+                accelerateSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
             timeToFinish = baseTimeToFinish;
             currentSpeed = 1;
             StopTimer();
@@ -85,6 +93,7 @@ public class TimerManager : MonoBehaviour
     
     public void AccelerateTimer()
     {
+        accelerateSound.start();
         currentSpeed = 60;
     }
 

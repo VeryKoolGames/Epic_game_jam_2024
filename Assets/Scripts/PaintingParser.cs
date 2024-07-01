@@ -153,10 +153,8 @@ public class PaintingParser : MonoBehaviour
     
     public void parsePainting()
     {
-        Debug.Log("Parsing painting");
         if (spriteRenderer.sprite == null)
         {
-            Debug.Log("No sprite found");
             return;
         }
         ResetAll();

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{3a188fa4-d9f5-4837-9a55-78eac4504625}">
+		<property name="assetPath">
+			<value>resultAnnouncements/badPerfo/performance-nulle-kenneth.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.1106666666666665</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{dc0a8382-1b1b-48a5-8b79-0e9e4f68db0b}</destination>
+		</relationship>
+	</object>
+</objects>

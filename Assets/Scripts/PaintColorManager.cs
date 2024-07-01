@@ -1,17 +1,13 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class PaintColorManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> colorPickingButtons = new List<GameObject>();
     [SerializeField] private List<GameObject> colorPickingButtonsLock = new List<GameObject>();
     [SerializeField] private OnColorSpawnedListener onColorSpawnedListener;
+    [SerializeField] private OnColorChoiceListener onColorChoiceListener;
     private int numberOfColors = 0;
     private List<Color> unlockableColors = new List<Color>();
     private const float colorThreshold = 0.1f; // Threshold for color comparison
@@ -19,17 +15,19 @@ public class PaintColorManager : MonoBehaviour
     private void OnEnable()
     {
         onColorSpawnedListener.Response.AddListener(SetColor);
+        onColorChoiceListener.Response.AddListener(SetSelectedButton);
     }
 
     private void OnDisable()
     {
         ClearButtons();
         onColorSpawnedListener.Response.RemoveListener(SetColor);
+        onColorChoiceListener.Response.RemoveListener(SetSelectedButton);
     }
     
     public void ClearButtons()
     {
-        for (int i = 0; i < colorPickingButtons.Count - 1; i++)
+        for (int i = 0; i < colorPickingButtons.Count; i++)
         {
             StoreColorPick storeColorPick = colorPickingButtons[i].GetComponent<StoreColorPick>();
             colorPickingButtons[i].GetComponent<SpriteRenderer>().color = Color.white;
@@ -37,6 +35,7 @@ public class PaintColorManager : MonoBehaviour
             storeColorPick.color = Color.white;
             colorPickingButtons[i].transform.localScale = new Vector3(0, 0, 0);
             colorPickingButtonsLock[i].GetComponent<ButtonLogic>().UnlockButton();
+            colorPickingButtonsLock[i].GetComponent<ButtonLogic>().RemoveAsSelected();
         }
         numberOfColors = 0;
         unlockableColors.Clear();
@@ -51,6 +50,22 @@ public class PaintColorManager : MonoBehaviour
                 UpdateUnlockableUI(unlockableColor);
                 unlockableColors.Remove(unlockableColor);
                 break;
+            }
+        }
+    }
+
+    public void SetSelectedButton(Color color)
+    {
+        for (int i = 0; i < colorPickingButtons.Count; i++)
+        {
+            StoreColorPick storeColorPick = colorPickingButtons[i].GetComponent<StoreColorPick>();
+            if (storeColorPick.color == color)
+            {
+                colorPickingButtonsLock[i].GetComponent<ButtonLogic>().SetAsSelected();
+            }
+            else
+            {
+                colorPickingButtonsLock[i].GetComponent<ButtonLogic>().RemoveAsSelected();
             }
         }
     }
@@ -80,7 +95,6 @@ public class PaintColorManager : MonoBehaviour
 
     public void SetColor(Color color)
     {
-        Debug.Log("Setting color: " + color);
         for (int i = 0; i < colorPickingButtons.Count; i++)
         {
             StoreColorPick storeColorPick = colorPickingButtons[i].GetComponent<StoreColorPick>();

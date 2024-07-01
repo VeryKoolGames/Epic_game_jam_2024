@@ -25,9 +25,22 @@ public class FinishPopUpManager : MonoBehaviour
 
     public void ShowFinishPopUp(int ranking)
     {
-        for (int i = 0; i < ranking; i++)
+        for (int i = 0; i < ranking + 1; i++)
         {
             finishRankings[i].SetActive(true);
+        }
+
+        if (ranking <= 1)
+        {
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.resultBad, transform.position);
+        }
+        else if (ranking <= 3)
+        {
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.resultMedium, transform.position);
+        }
+        else
+        {
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.resultGood, transform.position);
         }
         rankingText.text = rankingTexts[ranking];
         percentageText.text = "***" + percentage + "%" + "***";
@@ -39,6 +52,7 @@ public class FinishPopUpManager : MonoBehaviour
         {
             finishRankings[i].SetActive(false);
         }
+        gameObject.SetActive(false);
     }
     public void CloseFinishPopUp()
     {

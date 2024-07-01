@@ -32,8 +32,11 @@ public class GeeTeeAyFive : MonoBehaviour {
   
   private void OnMouseOver() {
     // If it hasn't already been pressed.
+    Debug.Log("Mouse over tile");
+    Debug.Log("Active: " + active);
     if (active) {
       if (Input.GetMouseButtonDown(0)) {
+        Debug.Log("Left click on tile");
         spriteRenderer.sprite = clickedTile;
         smiley.GetComponent<SpriteRenderer>().sprite = smiley.GetComponent<GeeTeeAyFiveSmiley>().getClickedTileSmiley();
       }

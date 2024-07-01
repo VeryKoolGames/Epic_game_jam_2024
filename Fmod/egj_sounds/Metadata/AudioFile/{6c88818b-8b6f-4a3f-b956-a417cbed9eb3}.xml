@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{6c88818b-8b6f-4a3f-b956-a417cbed9eb3}">
+		<property name="assetPath">
+			<value>WelcomeSounds/bienvenue-kenneth.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.7066666666666668</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{dc0a8382-1b1b-48a5-8b79-0e9e4f68db0b}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -19,6 +19,19 @@ public class FmodEvents : MonoBehaviour
     public EventReference tableauDeparture;
     public EventReference singleClickSound;
     public EventReference welcomeSound;
+    public EventReference kenBoom;
+    public EventReference kenSploosh;
+    public EventReference windowsStart;
+    public EventReference windowsStop;
+    public EventReference oldComputerSound;
+    public EventReference goodByeSound;
+    public EventReference resultBad;
+    public EventReference resultMedium;
+    public EventReference resultGood;
+    public EventReference tadaSound;
+    public EventReference middleBrushSound;
+    public EventReference bigBrushSound;
+    public EventReference accelerateSound;
 
     private void Awake()
     {

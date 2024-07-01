@@ -11,6 +11,11 @@ public class StoreColorPick : MonoBehaviour
     [SerializeField] private OnColorChoiceEvent onColorChoiceEvent;
 
 
+    private void Start()
+    {
+        color = GetComponent<SpriteRenderer>().color;
+    }
+
     public bool IsOccupied
     {
         get => isOccupied;

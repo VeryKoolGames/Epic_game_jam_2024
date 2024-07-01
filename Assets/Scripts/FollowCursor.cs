@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DefaultNamespace;
 using DG.Tweening;
 using FMOD.Studio;
@@ -20,14 +21,15 @@ public class FollowCursor : MonoBehaviour
     private Color[] originalPixels; // To store the original pixels
     private Vector2Int textureSize;
     private int id;
-    private EventInstance smallBrushSound;
+    private EventInstance brushSound;
     private int brushSize = 20;
     [SerializeField] private Animator playerAnimator;
+    private bool canDraw = true;
 
     private void Awake()
     {
         texture = DuplicateTexture(spriteRenderer.sprite.texture);
-        originalPixels = texture.GetPixels(); // Store the original pixels
+        originalPixels = texture.GetPixels();
 
         if (!texture.isReadable)
         {
@@ -40,24 +42,46 @@ public class FollowCursor : MonoBehaviour
 
     private void Start()
     {
-        smallBrushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.smallBrushSound);
+        brushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.middleBrushSound);
+    }
+
+    private void OnEnable()
+    {
+        ResetTexture();
+    }
+    
+    public void ResetBrushColor()
+    {
+        currentPaintColor = Color.white;
     }
 
     public void UpdateBrushSize(int size)
     {
+        if (size < 15)
+        {
+            brushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.smallBrushSound);
+        }
+        else if (size < 25)
+        {
+            brushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.middleBrushSound);
+        }
+        else
+        {
+            brushSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.bigBrushSound);
+        }
         brushSize = size;
     }
 
     public void ResetTexture()
     {
-        Debug.Log(texture);
-        Color[] whitePixels = new Color[textureSize.x * textureSize.y];
-        for (int i = 0; i < whitePixels.Length; i++)
-        {
-            whitePixels[i] = Color.white;
-        }
-
-        texture.SetPixels(whitePixels); // Set all pixels to white
+        texture.SetPixels(originalPixels);
+        // Color[] whitePixels = new Color[t(extureSize.x * textureSize.y];
+        // for (int i = 0; i < whitePixels.Length; i++)
+        // {
+        //     whitePixels[i] = Color.white;
+        // }
+        //
+        // texture.SetPixels(whitePixels); /)/ Set all pixels to white
         texture.Apply();
     }
     
@@ -68,7 +92,6 @@ public class FollowCursor : MonoBehaviour
     
     public void SetCurrentColor(Color color)
     {
-        Debug.Log("Setting current color");
         hasBlended = false;
         currentPaintColor = color;
     }
@@ -81,21 +104,38 @@ public class FollowCursor : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isMouseButtonDown = true;
-                smallBrushSound.start();
+                brushSound.start();
                 playerAnimator.SetBool("isPainting", true);
             }
             
         }
         if (Input.GetMouseButtonUp(0))
         {
-            smallBrushSound.stop(STOP_MODE.IMMEDIATE);
+            brushSound.stop(STOP_MODE.IMMEDIATE);
             isMouseButtonDown = false;
             playerAnimator.SetBool("isPainting", false);
         }
-        if (isMouseButtonDown)
+        if (isMouseButtonDown && canDraw)
         {
             PaintSquares(transform.position);
         }
+    }
+
+    public void delayCanDraw()
+    {
+        canDraw = false;
+        StartCoroutine(waitForPopUp());
+    }
+    
+    IEnumerator waitForPopUp()
+    {
+        yield return new WaitForSeconds(1);
+        canDraw = true;
+    }
+    
+    public void SetCanDraw(bool value)
+    {
+        canDraw = value;
     }
     
     private Texture2D DuplicateTexture(Texture2D source)
@@ -126,7 +166,6 @@ public class FollowCursor : MonoBehaviour
         Vector2 localPoint;
         if (GetMousePixelPosition(out localPoint))
         {
-            Debug.Log("Painting");
             PaintPixels(localPoint, currentPaintColor, brushSize);
         }
     }
@@ -176,21 +215,6 @@ public class FollowCursor : MonoBehaviour
         }
         texture.Apply();
     }
-    
-    private Color BlendColors(Color color1, Color color2)
-    {
-        if (color2 == Color.white || color1 == color2)
-        {
-            return color1;
-        }
-        float blendFactor = 0.5f;
-        float r = Mathf.Lerp(color1.r, color2.r, blendFactor);
-        float g = Mathf.Lerp(color1.g, color2.g, blendFactor);
-        float b = Mathf.Lerp(color1.b, color2.b, blendFactor);
-        Color ret = new Color(r, g, b, 1.0f);
-        hasBlended = true;
-        return ret;
-    }
 
     private void LerpToMouse()
     {
@@ -204,7 +228,7 @@ public class FollowCursor : MonoBehaviour
         if (!value)
         {
             isMouseButtonDown = false;
-            smallBrushSound.stop(STOP_MODE.IMMEDIATE);
+            brushSound.stop(STOP_MODE.IMMEDIATE);
         }
         isMouseInZone = value;
     }

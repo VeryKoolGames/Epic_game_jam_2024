@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -40,6 +41,12 @@ public class DetectPlayerCursor : MonoBehaviour
     
     public void ActivateCanvas()
     {
+        StartCoroutine(DelayedActivation());
+    }
+    
+    private IEnumerator DelayedActivation()
+    {
+        yield return new WaitForSeconds(.5f);
         zoneCollider.enabled = true;
     }
 
