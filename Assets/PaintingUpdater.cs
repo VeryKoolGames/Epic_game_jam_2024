@@ -8,12 +8,16 @@ using Random = UnityEngine.Random;
 public class PaintingUpdater : MonoBehaviour
 {
     [SerializeField] private FadeEffectController fadeEffectController;
-    [SerializeField] private List<Sprite> paintings = new List<Sprite>();
-    [SerializeField] private List<Sprite> paintingCopy = new List<Sprite>();
+    private List<Sprite> paintings = new List<Sprite>();
+    private List<Sprite> paintingCopy = new List<Sprite>();
     private List<EventInstance> mainMusics = new List<EventInstance>();
     private EventInstance currentMusic;
     private int currentPaintingIndex = 0;
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        LoadPaintingsFromResources();
+    }
 
     private void OnEnable()
     {
@@ -26,26 +30,40 @@ public class PaintingUpdater : MonoBehaviour
         currentMusic = mainMusics[0];
         fadeEffectController.FirstFade(GetRandomPainting());
     }
-    
-    private void CopyPaintings()
+
+    private void LoadPaintingsFromResources()
     {
-        paintingCopy = new List<Sprite>(paintings);
+        paintings.Clear();
+        paintingCopy.Clear();
+        
+        paintings.Add(Resources.Load<Sprite>("Oeuvre1"));
+        paintings.Add(Resources.Load<Sprite>("Oeuvre3"));
+        paintings.Add(Resources.Load<Sprite>("Oeuvre4"));
+
+        paintingCopy.AddRange(paintings);
     }
 
     private Sprite GetRandomPainting()
     {
         if (paintingCopy.Count == 0)
         {
-            return null;
+            CopyPaintings();
         }
+
         if (currentPaintingIndex < mainMusics.Count - 1)
             currentPaintingIndex++;
         currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
         mainMusics[currentPaintingIndex].start();
         currentMusic = mainMusics[currentPaintingIndex];
-        Sprite RandomSprite = paintingCopy[Random.Range(0, paintingCopy.Count)];
-        paintingCopy.Remove(RandomSprite);
-        return RandomSprite;
+
+        Sprite randomSprite = paintingCopy[Random.Range(0, paintingCopy.Count)];
+        paintingCopy.Remove(randomSprite);
+        return randomSprite;
+    }
+
+    private void CopyPaintings()
+    {
+        paintingCopy = new List<Sprite>(paintings);
     }
 
     public void OnPaintingChange()
@@ -57,6 +75,6 @@ public class PaintingUpdater : MonoBehaviour
     {
         currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
         mainMusics.Clear();
-        paintingCopy = paintings;
+        paintingCopy = new List<Sprite>(paintings);
     }
 }

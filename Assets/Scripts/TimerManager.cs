@@ -22,6 +22,7 @@ public class TimerManager : MonoBehaviour
 
     private void OnEnable()
     {
+        countPainting = 0;
         isTimerRunning = true;
         baseTimeToFinish = timeToFinish;
         currentSpeed = 1;

@@ -115,7 +115,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unclickedTile: {fileID: 21300000, guid: c9258de09af874be2a821dfd667b6bfe, type: 3}
   flaggedTile: {fileID: 21300000, guid: 8c195d741e06a45e2a62717b6d65b034, type: 3}
+  clickedTile: {fileID: 0}
   clickedTiles:
   - {fileID: 21300000, guid: f48ec37b0b58142f4bf7637111997f47, type: 3}
   - {fileID: 21300000, guid: d5c934e86931c4af9be4321e91532cdc, type: 3}
@@ -159,6 +160,7 @@ MonoBehaviour:
   mineWrongTile: {fileID: 21300000, guid: f8c17e38a24e345819944baaeab4bdd0, type: 3}
   mineHitTile: {fileID: 21300000, guid: 8851422600931488b85cb3c53e252a68, type: 3}
   gameManager: {fileID: 0}
+  smiley: {fileID: 0}
   flagged: 0
   active: 1
   isMine: 0

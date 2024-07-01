@@ -1,30 +1,58 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using Random = UnityEngine.Random;
 
 // copied from https://github.com/Firnox/Minesweeper
 public class GeeTeeAyFiveManager : MonoBehaviour {
   [SerializeField] private Transform tilePrefab;
   [SerializeField] private Transform geeTeeAyFiveHolder;
   [SerializeField] private GameObject geeTeeAyFiveSmiley;
-  [SerializeField] private AudioClip[] audioClips; // 1:sploosh, 2:kaboom
   
   private List<GameObject> tiles = new();
+  private Vector3 baseScale;
   
   private int width;
   private int height;
   private int numMines;
-  private AudioSource src;
   
   private readonly float tileSize = 0.5f;
   
   // Start is called before the first frame update
-  void Start() {
-    src = GetComponent<AudioSource>();
-    CreateGameBoard(9, 9, 10); // Easy
-    // CreateGameBoard(16, 16, 40); // Intermediate
-    // CreateGameBoard(30, 16, 99); // Expert
-    ResetGameState();
+  // void Start() {
+  //   src = GetComponent<AudioSource>();
+  //   CreateGameBoard(9, 9, 10); // Easy
+  //   // CreateGameBoard(16, 16, 40); // Intermediate
+  //   // CreateGameBoard(30, 16, 99); // Expert
+  //   ResetGameState();
+  // }
+
+  private void Start()
+  {
+    baseScale = transform.localScale;
+    Debug.Log("sclale: " + baseScale);
+  }
+
+  private void OnEnable()
+  {
+    transform.localScale = Vector3.zero;
+    transform.DOScale(1f, .2f).OnComplete((() =>
+    {
+      CreateGameBoard(9, 9, 10); // Easy
+      ResetGameState();
+    }));
+  }
+  
+  public void CloseWindow()
+  {
+    transform.DOScale(0f, .2f).OnComplete(() =>
+    {
+      gameObject.SetActive(false);
+      transform.localScale = baseScale;
+    });
   }
 
   private void OnMouseOver()
@@ -47,8 +75,8 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
     for (int row = 0; row < height; row++) {
       for (int col = 0; col < width; col++) {
         // Position the tile in the correct place (centred).
-        Transform tileTransform = Instantiate(tilePrefab);
-        tileTransform.parent = geeTeeAyFiveHolder;
+        Debug.Log("Creating tile");
+        Transform tileTransform = Instantiate(tilePrefab, geeTeeAyFiveHolder, true);
         float xIndex = col - ((width - 1) / 2.0f);
         float yIndex = row - ((height - 1) / 2.0f);
         tileTransform.localPosition = new Vector2(xIndex * tileSize, yIndex * tileSize);
@@ -61,7 +89,6 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
     }
   }
   public void ResetGameState() {
-    Debug.Log("RESET");
     
     // Reset sprite to unclicked and not mine
     for (int i = 0; i < tiles.Count; i++)
@@ -142,8 +169,7 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
       tile.GetComponent<GeeTeeAyFive>().ShowGameOverState();
     }
     // Play Kaboom Sound
-    src.clip = audioClips[1];
-    src.Play();
+    AudioManager.Instance.PlayOneShot(FmodEvents.Instance.kenBoom, transform.position);
   }
   
   public void CheckGameOver() {
@@ -156,15 +182,13 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
     }
     if (count == numMines) {
       // Flag and disable everything, we're done.
-      Debug.Log("Winner!");
       foreach (GameObject tile in tiles) {
         tile.GetComponent<GeeTeeAyFive>().active = false;
         tile.GetComponent<GeeTeeAyFive>().SetFlaggedIfMine();
       }
     }
     // Play Sploosh sound
-    src.clip = audioClips[0];
-    src.Play();
+    AudioManager.Instance.PlayOneShot(FmodEvents.Instance.kenSploosh, transform.position);
   }
   
   // Click on all surrounding tiles if mines are all flagged.

@@ -15,7 +15,13 @@ public class CompareManager : MonoBehaviour
     private float nCorrect;
     private float pCorrect;
     private float compensation;
-    
+    private List<int> results;
+
+    private void OnEnable()
+    {
+        results = new List<int>();
+    }
+
     public int GetPercentageCorrect()
     {
         paintToCopy = paintingParser.GetPaintColors();
@@ -37,7 +43,13 @@ public class CompareManager : MonoBehaviour
         compensation = HasPlayed() ? 5 : 0; // added 5% more to be happy
         pCorrect = (float)nCorrect / paintFinal.Length * 100 + compensation;
         float ret = (pCorrect > 100 ? 100 : pCorrect);
+        results.Add((int)ret);
         return (int)ret;
+    }
+    
+    public int GetAveragePercentage()
+    {
+        return results.Sum() / results.Count;
     }
     
     private int percentageToInt(float percentage)

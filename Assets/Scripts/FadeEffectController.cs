@@ -22,6 +22,8 @@ public class FadeEffectController : MonoBehaviour
 
     public void FadePainting(Sprite painting)
     {
+        Debug.Log("Fading painting: ");
+        Debug.Log("painting content: " + painting);
         StartFadeOut();
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.tableauArrival, transform.position);
         StartCoroutine(WaitFade(painting));
@@ -37,7 +39,6 @@ public class FadeEffectController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         paintingParser.parsePainting();
-        Debug.Log("Parsing painting in first fade");
         StartFadeIn();
     }
 

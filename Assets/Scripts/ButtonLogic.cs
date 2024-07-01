@@ -11,6 +11,7 @@ public class ButtonLogic : MonoBehaviour
     [SerializeField] private Sprite hoverSprite;
     [SerializeField] private UnityEvent onClick;
     private bool isLocked = false;
+    private bool isSelected = false;
     
     public void LockButton()
     {
@@ -19,7 +20,7 @@ public class ButtonLogic : MonoBehaviour
     
     private void OnMouseEnter()
     {
-        if (isLocked)
+        if (isLocked || isSelected)
         {
             return;
         }
@@ -28,12 +29,16 @@ public class ButtonLogic : MonoBehaviour
     
     private void OnMouseExit()
     {
+        if (isLocked || isSelected)
+        {
+            return;
+        }
         GetComponent<SpriteRenderer>().sprite = unpressedSprite;
     }
     
     private void OnMouseDown()
     {
-        if (isLocked)
+        if (isLocked || isSelected)
         {
             return;
         }
@@ -43,7 +48,7 @@ public class ButtonLogic : MonoBehaviour
     
     private void OnMouseUp()
     {
-        if (isLocked)
+        if (isLocked || isSelected)
         {
             return;
         }
@@ -68,5 +73,17 @@ public class ButtonLogic : MonoBehaviour
     public void UnlockButton()
     {
         isLocked = false;
+    }
+
+    public void SetAsSelected()
+    {
+        isSelected = true;
+        GetComponent<SpriteRenderer>().sprite = pressedSprite;
+    }
+
+    public void RemoveAsSelected()
+    {
+        isSelected = false;
+        GetComponent<SpriteRenderer>().sprite = unpressedSprite;
     }
 }

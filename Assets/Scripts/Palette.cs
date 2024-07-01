@@ -6,7 +6,6 @@ public class Palette : MonoBehaviour
 {
     private bool isMouseInZone;
     private bool isMouseButtonDown;
-    private ColorsEnum currentColor = ColorsEnum.WHITE;
     private Color currentPaintColor = Color.white;
     private Color lastMix;
     private List<Color> selectedColors = new List<Color>();
@@ -43,6 +42,11 @@ public class Palette : MonoBehaviour
         texture.Apply();
     }
     
+    public void ResetBrushColor()
+    {
+        currentPaintColor = Color.white;
+    }
+    
     public void SetCurrentColor(Color color)
     {
         hasBlended = false;
@@ -51,7 +55,6 @@ public class Palette : MonoBehaviour
         {
             selectedColors.Add(color);
         } 
-        Debug.Log(selectedColors.Count);
     }
 
     void Update()
@@ -174,12 +177,13 @@ public class Palette : MonoBehaviour
     {
         Color colorPanel = texture.GetPixel(x, y);
 
-        if (colorPanel == Color.white || colorPanel == colorSelected)
+        if (colorPanel == Color.white || colorPanel == colorSelected || colorPanel == new Color(1,1,1,0))
         {
             return colorSelected;
         }
         if (new Color(0.863f, 0.529f, 0.286f, 1.000f) == colorPanel)
         {
+            Debug.Log("Color panel detecetd");
             return colorSelected;
         }
 

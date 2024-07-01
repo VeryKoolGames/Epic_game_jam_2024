@@ -38,6 +38,7 @@ public class LoadingScreenManager : MonoBehaviour
             loadingSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             gameWindow.SetActive(true);
             gameWindow.transform.localScale = Vector3.zero;
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.welcomeSound, transform.position);
         }));
         sequence.Append(gameWindow.transform.DOScale(gameWindowScale, .2f).OnComplete(() =>
         {
