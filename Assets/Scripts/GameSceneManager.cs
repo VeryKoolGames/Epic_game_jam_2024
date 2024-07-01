@@ -14,6 +14,7 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField] private GameObject gtaWindow;
     [SerializeField] private CanvasGroup logoCanvasGroup;
     [SerializeField] private CanvasGroup fadeCanvasGroup;
+    [SerializeField] private GameObject startCanvas;
 
     [SerializeField] private UnityEvent onGameSceneClosed;
     // Start is called before the first frame update
@@ -57,6 +58,7 @@ public class GameSceneManager : MonoBehaviour
         StartCoroutine(DelayFadeOut(5f, logoCanvasGroup));
         StartCoroutine(DelayFadeOut(7f, fadeCanvasGroup));
         StartCoroutine(DelayMusicStart(6f));
+        StartCoroutine(DelayCanvasDeactivation(8f));
     }
 
     private IEnumerator SteppedFade(CanvasGroup canvasGroup, float targetAlpha, float duration, int steps)
@@ -82,6 +84,12 @@ public class GameSceneManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.oldComputerSound, transform.position);
+    }
+    
+    private IEnumerator DelayCanvasDeactivation(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        startCanvas.SetActive(false);
     }
     
 }

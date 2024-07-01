@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,4 +12,5 @@ public class StartPauseMenu : MonoBehaviour
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
     }
+    
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -28,5 +29,9 @@ public class EndPopUpManager : MonoBehaviour
             gameObject.SetActive(false);
         })));
     }
-    
+
+    private void OnDisable()
+    {
+        gameObject.SetActive(false);
+    }
 }

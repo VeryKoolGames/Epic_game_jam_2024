@@ -164,16 +164,16 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
   }
   
   public void GameOver() {
+    AudioManager.Instance.PlayOneShot(FmodEvents.Instance.kenBoom, transform.position);
     // Disable clicks on all mines.
     foreach (GameObject tile in tiles) {
       tile.GetComponent<GeeTeeAyFive>().ShowGameOverState();
     }
     // Play Kaboom Sound
-    AudioManager.Instance.PlayOneShot(FmodEvents.Instance.kenBoom, transform.position);
   }
   
   public void CheckGameOver() {
-    // If there are numMines left active then we're done.
+    AudioManager.Instance.PlayOneShot(FmodEvents.Instance.kenSploosh, transform.position);
     int count = 0;
     foreach (GameObject tile in tiles) {
       if (tile.GetComponent<GeeTeeAyFive>().active) {
@@ -187,8 +187,6 @@ public class GeeTeeAyFiveManager : MonoBehaviour {
         tile.GetComponent<GeeTeeAyFive>().SetFlaggedIfMine();
       }
     }
-    // Play Sploosh sound
-    AudioManager.Instance.PlayOneShot(FmodEvents.Instance.kenSploosh, transform.position);
   }
   
   // Click on all surrounding tiles if mines are all flagged.

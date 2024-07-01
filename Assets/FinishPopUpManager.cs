@@ -52,6 +52,7 @@ public class FinishPopUpManager : MonoBehaviour
         {
             finishRankings[i].SetActive(false);
         }
+        gameObject.SetActive(false);
     }
     public void CloseFinishPopUp()
     {

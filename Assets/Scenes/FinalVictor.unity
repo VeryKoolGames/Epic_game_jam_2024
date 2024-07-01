@@ -1727,7 +1727,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1564917809}
   - {fileID: 688831015}
   m_Father: {fileID: 45587550}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1743,6 +1742,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bef88ff2b4d44f32a9b206efa64a0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onGamePaused:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1021285549}
+        m_TargetAssemblyTypeName: FollowCursor, Assembly-CSharp
+        m_MethodName: SetCanDraw
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onGameRestart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1021285549}
+        m_TargetAssemblyTypeName: FollowCursor, Assembly-CSharp
+        m_MethodName: SetCanDraw
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &289514263 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6221906043703207161, guid: 128c5b36d42154815bd2b932dcfdfe40,
@@ -2180,7 +2209,7 @@ PrefabInstance:
     - target: {fileID: 3083637519701871343, guid: aecaf9d4fec0f4deb9d09abe3993614a,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3083637519701871343, guid: aecaf9d4fec0f4deb9d09abe3993614a,
         type: 3}
@@ -2685,10 +2714,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0014757216, y: 0.0044267774}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2699,7 +2728,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.6564129, y: 0.6918278}
   m_EdgeRadius: 0
 --- !u!212 &450380684
 SpriteRenderer:
@@ -4113,6 +4142,7 @@ RectTransform:
   m_LocalScale: {x: 0.086825356, y: 0.086825356, z: 0.086825356}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1564917809}
   - {fileID: 1063081838}
   m_Father: {fileID: 273947432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4182,7 +4212,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!1 &696787568
 GameObject:
@@ -6004,7 +6034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000047684, y: 0}
+  m_AnchoredPosition: {x: -0, y: 0}
   m_SizeDelta: {x: 24.682, y: 5.613}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1063081839
@@ -8216,6 +8246,13 @@ MonoBehaviour:
       Data3: -1851655504
       Data4: -1110816799
     Path: event:/bigBrushSound
+  accelerateSound:
+    Guid:
+      Data1: -791977060
+      Data2: 1253430823
+      Data3: -253491540
+      Data4: -1237855672
+    Path: event:/clockAccelerating
 --- !u!1 &1261219693
 GameObject:
   m_ObjectHideFlags: 0
@@ -8470,6 +8507,7 @@ MonoBehaviour:
   gtaWindow: {fileID: 197354414}
   logoCanvasGroup: {fileID: 679111600}
   fadeCanvasGroup: {fileID: 399864300}
+  startCanvas: {fileID: 1324232662}
   onGameSceneClosed:
     m_PersistentCalls:
       m_Calls: []
@@ -10615,12 +10653,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564917808}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.1082633, y: -3.0843523, z: 0}
+  m_LocalScale: {x: 11.517372, y: 11.517372, z: 11.517372}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 273947432}
+  m_Father: {fileID: 688831015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1564917810
 SpriteRenderer:

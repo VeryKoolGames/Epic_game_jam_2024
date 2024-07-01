@@ -31,6 +31,7 @@ public class FmodEvents : MonoBehaviour
     public EventReference tadaSound;
     public EventReference middleBrushSound;
     public EventReference bigBrushSound;
+    public EventReference accelerateSound;
 
     private void Awake()
     {
