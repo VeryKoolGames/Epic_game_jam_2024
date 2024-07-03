@@ -25,8 +25,8 @@ public class FinishPopUpManager : MonoBehaviour
 
     public void ShowFinishPopUp(int ranking)
     {
-        for (int i = 0; i < ranking + 1; i++)
-        {
+        for (int i = 0; i < ranking; i++)
+        {   
             finishRankings[i].SetActive(true);
         }
 

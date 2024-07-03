@@ -75,7 +75,7 @@ public class Palette : MonoBehaviour
         }
         if (isMouseButtonDown)
         {
-            PaintSquares(transform.position);
+            PaintSquares();
         }
     }
     
@@ -102,7 +102,7 @@ public class Palette : MonoBehaviour
         return readableText;
     }
 
-    private void PaintSquares(Vector3 position)
+    private void PaintSquares()
     {
         Vector2 localPoint;
         if (GetMousePixelPosition(out localPoint))
@@ -142,7 +142,7 @@ public class Palette : MonoBehaviour
         {
             for (int x = -radius; x <= radius; x++)
             {
-                if (x * x + y * y <= radius * radius) // Check if the pixel is within the circle
+                if (x * x + y * y <= radius * radius)
                 {
                     int pixelX = cx + x;
                     int pixelY = cy + y;
@@ -177,16 +177,12 @@ public class Palette : MonoBehaviour
     {
         Color colorPanel = texture.GetPixel(x, y);
 
-        if (colorPanel == Color.white || colorPanel == colorSelected || colorPanel == new Color(1,1,1,0))
+        if (colorPanel == colorSelected || colorPanel == new Color(0,0,0,0))
         {
-            return colorSelected;
-        }
-        if (new Color(0.863f, 0.529f, 0.286f, 1.000f) == colorPanel)
-        {
-            Debug.Log("Color panel detecetd");
             return colorSelected;
         }
 
+        Debug.Log("Mixing colors");
         float blendFactor = 0.5f;
         float r = Mathf.Lerp(colorPanel.r, colorSelected.r, blendFactor);
         float g = Mathf.Lerp(colorPanel.g, colorSelected.g, blendFactor);
