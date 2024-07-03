@@ -24,6 +24,7 @@ public class SaveToLeaderboard : MonoBehaviour
         int percentage = compareManager.GetAveragePercentage();
         
         leaderboard.AddEntry(new LeaderboardEntry(playerName, percentage, spriteSaver.GetSprites()));
+        playerTextInput.text = "";
     }
 
     private void OnDisable()

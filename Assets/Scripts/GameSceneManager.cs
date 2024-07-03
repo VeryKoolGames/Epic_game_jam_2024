@@ -15,6 +15,7 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField] private CanvasGroup logoCanvasGroup;
     [SerializeField] private CanvasGroup fadeCanvasGroup;
     [SerializeField] private GameObject startCanvas;
+    [SerializeField] private GameObject leaderboardWindow;
 
     [SerializeField] private UnityEvent onGameSceneClosed;
     // Start is called before the first frame update
@@ -49,7 +50,11 @@ public class GameSceneManager : MonoBehaviour
     {
         gtaWindow.SetActive(true);
     }
-
+    
+    public void LaunchLeaderboardWindow()
+    {
+        leaderboardWindow.SetActive(true);
+    }
     
     private void OnGameLaunch()
     {
