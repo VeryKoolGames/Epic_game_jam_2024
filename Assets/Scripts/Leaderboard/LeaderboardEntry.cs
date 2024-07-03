@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -6,13 +7,17 @@ public class LeaderboardEntry
 {
     public string playerName;
     public float completionPercentage;
-    public string spriteBase64;
+    public List<string> spriteBase64One;
 
-    public LeaderboardEntry(string playerName, float completionPercentage, Sprite sprite)
+    public LeaderboardEntry(string playerName, float completionPercentage, List<Sprite> sprite)
     {
+        spriteBase64One = new List<string>();
         this.playerName = playerName;
         this.completionPercentage = completionPercentage;
-        this.spriteBase64 = SpriteToBase64(sprite);
+        foreach (Sprite s in sprite)
+        {
+            this.spriteBase64One.Add(SpriteToBase64(s));
+        }
     }
 
     public static string SpriteToBase64(Sprite sprite)
@@ -29,8 +34,9 @@ public class LeaderboardEntry
         if (string.IsNullOrEmpty(base64)) return null;
 
         byte[] bytes = Convert.FromBase64String(base64);
-        Texture2D texture = new Texture2D(2, 2);
+        Texture2D texture = new Texture2D(492, 459, TextureFormat.RGBA32, false);
         texture.LoadImage(bytes);
-        return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        var ret = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        return ret;
     }
 }

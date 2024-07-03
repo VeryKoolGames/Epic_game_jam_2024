@@ -9,7 +9,7 @@ using UnityEngine;
 public class FollowCursor : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private GridStateManager gridStateManager;
+    [SerializeField] private SpriteSaver spriteSaver;
     private bool isMouseInZone;
     private bool isMouseButtonDown;
     private ColorsEnum currentColor = ColorsEnum.WHITE;
@@ -75,14 +75,12 @@ public class FollowCursor : MonoBehaviour
     public void ResetTexture()
     {
         texture.SetPixels(originalPixels);
-        // Color[] whitePixels = new Color[t(extureSize.x * textureSize.y];
-        // for (int i = 0; i < whitePixels.Length; i++)
-        // {
-        //     whitePixels[i] = Color.white;
-        // }
-        //
-        // texture.SetPixels(whitePixels); /)/ Set all pixels to white
         texture.Apply();
+    }
+    
+    public void SaveSprite()
+    {
+        spriteSaver.SaveSprite(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)));
     }
     
     public Color[] GetAllPixels()

@@ -12,10 +12,19 @@ public class Leaderboard : MonoBehaviour
         leaderboardFilePath = Path.Combine(Application.persistentDataPath, "leaderboard.json");
         LoadLeaderboard();
     }
-
-    public void AddEntry(string playerName, float completionPercentage, Sprite sprite)
+    
+    private void DeleteFile()
     {
-        entries.Add(new LeaderboardEntry(playerName, completionPercentage, sprite));
+        if (File.Exists(leaderboardFilePath))
+        {
+            Debug.Log("Deleting leaderboard file");
+            File.Delete(leaderboardFilePath);
+        }
+    }
+
+    public void AddEntry(LeaderboardEntry entry)
+    {
+        entries.Add(entry);
         SaveLeaderboard();
     }
 

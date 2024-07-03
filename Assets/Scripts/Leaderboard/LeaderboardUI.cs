@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,23 +6,43 @@ using UnityEngine.UI;
 public class LeaderboardUI : MonoBehaviour
 {
     public Leaderboard leaderboard;
-    public TextMeshProUGUI playerNameText;
-    public TextMeshProUGUI playerScoreText;
-    public Image playerSprite;
+    [SerializeField] private GameObject leaderboardEntryPrefab;
+    [SerializeField] private GameObject leaderboardContent;
+    [SerializeField] private GameObject textIfEmpty;
 
-    void Start()
+    void OnEnable()
     {
-        DisplayLeaderboard();
+        Debug.Log("LeaderboardUI enabled: " + leaderboard.entries.Count);
+        if (leaderboard.entries.Count == 0)
+        {
+            textIfEmpty.SetActive(true);
+        }
+        else 
+            DisplayLeaderboard();
     }
-
+    
     void DisplayLeaderboard()
     {
-
-        foreach (LeaderboardEntry entry in leaderboard.entries)
+        foreach (Transform child in leaderboardContent.transform)
         {
-            playerNameText.text = entry.playerName;
-            playerScoreText.text = $"{entry.completionPercentage}%";
-            playerSprite.sprite = LeaderboardEntry.Base64ToSprite(entry.spriteBase64);
+            Destroy(child.gameObject);
         }
+        foreach (var entry in leaderboard.entries)
+        {
+            GameObject entryObj = Instantiate(leaderboardEntryPrefab, leaderboardContent.transform);
+            entryObj.transform.Find("TextPlayerName").GetComponent<TextMeshProUGUI>().text = entry.playerName;
+            entryObj.transform.Find("TextPlayerScore").GetComponent<TextMeshProUGUI>().text = entry.completionPercentage.ToString("F2") + "%";  
+            entryObj.transform.Find("ImageTableauOne").GetComponent<Image>().sprite =
+                LeaderboardEntry.Base64ToSprite(entry.spriteBase64One[0]);
+            entryObj.transform.Find("ImageTableauTwo").GetComponent<Image>().sprite =
+                LeaderboardEntry.Base64ToSprite(entry.spriteBase64One[1]);
+            entryObj.transform.Find("ImageTableauThree").GetComponent<Image>().sprite =
+                LeaderboardEntry.Base64ToSprite(entry.spriteBase64One[2]);
+        }
+    }
+
+    private void OnDisable()
+    {
+        textIfEmpty.SetActive(false);
     }
 }
