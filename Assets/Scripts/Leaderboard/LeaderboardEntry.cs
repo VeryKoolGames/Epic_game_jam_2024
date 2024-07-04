@@ -8,6 +8,7 @@ public class LeaderboardEntry
     public string playerName;
     public float completionPercentage;
     public List<string> spriteBase64One;
+    public int id;
 
     public LeaderboardEntry(string playerName, float completionPercentage, List<Sprite> sprite)
     {
