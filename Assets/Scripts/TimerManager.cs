@@ -21,26 +21,43 @@ public class TimerManager : MonoBehaviour
     private bool isTimerRunning = true;
     private int countPainting;
     private EventInstance accelerateSound;
+    private bool isSafeMode;
 
     private void OnEnable()
     {
+        isSafeMode = PlayerPrefs.GetInt("SafeMode") == 1;
         countPainting = 0;
-        isTimerRunning = true;
         baseTimeToFinish = timeToFinish;
         currentSpeed = 1;
-        UpdateTimerUI();
-        StartCoroutine(delayStart());
-        accelerateSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.accelerateSound);
+        if (isSafeMode)
+        {
+            timerText.text = "Safe Mode";
+        }
+        else
+        {
+            isTimerRunning = true;
+            UpdateTimerUI();
+            StartCoroutine(delayStart());
+            accelerateSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.accelerateSound);
+        }
     }
     
     public void StartTimer()
     {
+        if (isSafeMode)
+        {
+            return;
+        }
         countPainting++;
         isTimerRunning = true;
     }
     
     public void StopTimer()
     {
+        if (isSafeMode)
+        {
+            return;
+        }
         baseTimeToFinish = timeToFinish;
         isTimerRunning = false;
     }
@@ -53,7 +70,7 @@ public class TimerManager : MonoBehaviour
 
     void Update()
     {
-        if (isDelay || !isTimerRunning)
+        if (isDelay || !isTimerRunning || isSafeMode)
         {
             return;
         }
@@ -80,6 +97,10 @@ public class TimerManager : MonoBehaviour
     
     public void ResetTimer()
     {
+        if (isSafeMode)
+        {
+            return;
+        }
         timeToFinish = baseTimeToFinish;
         UpdateTimerUI();
     }
@@ -93,8 +114,22 @@ public class TimerManager : MonoBehaviour
     
     public void AccelerateTimer()
     {
-        accelerateSound.start();
-        currentSpeed = 60;
+        if (isSafeMode)
+        {
+            countPainting++;
+            onTimerEnd.Invoke();
+            if (countPainting < 3)
+                finishPopUp.SetActive(true);
+            else
+            {
+                finalPopUp.SetActive(true);
+            }
+        }
+        else
+        {
+            accelerateSound.start();
+            currentSpeed = 60;
+        }
     }
 
     private void OnDisable()

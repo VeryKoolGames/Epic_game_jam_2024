@@ -15,6 +15,8 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField] private CanvasGroup logoCanvasGroup;
     [SerializeField] private CanvasGroup fadeCanvasGroup;
     [SerializeField] private GameObject startCanvas;
+    [SerializeField] private GameObject leaderboardWindow;
+    private GameObject[] uncativeWindows;
 
     [SerializeField] private UnityEvent onGameSceneClosed;
     // Start is called before the first frame update
@@ -22,10 +24,15 @@ public class GameSceneManager : MonoBehaviour
     {
         Cursor.visible = false;
         OnGameLaunch();
+        uncativeWindows = new GameObject[] {gameWindow, loadingWindow, creditWindow, gtaWindow, leaderboardWindow};
     }
 
     public void LaunchLoadingWindow()
     {
+        if (CountActiveWindows() > 0)
+        {
+            return;
+        }
         loadingWindow.SetActive(true);
     }
     
@@ -39,17 +46,46 @@ public class GameSceneManager : MonoBehaviour
             gameWindow.transform.localScale = gameWindowScale;
         });
     }
+    
+    private int CountActiveWindows()
+    {
+        foreach (var VARIABLE in uncativeWindows)
+        {
+            if (VARIABLE.activeSelf)
+            {
+                return 1;
+            }
+        }
+
+        return 0;
+    }
 
     public void LauchCreditScene()
     {
+        if (CountActiveWindows() > 0)
+        {
+            return;
+        }
         creditWindow.SetActive(true);
     }
     
     public void LaunchGtaScene()
     {
+        if (CountActiveWindows() > 0)
+        {
+            return;
+        }
         gtaWindow.SetActive(true);
     }
-
+    
+    public void LaunchLeaderboardWindow()
+    {
+        if (CountActiveWindows() > 0)
+        {
+            return;
+        }
+        leaderboardWindow.SetActive(true);
+    }
     
     private void OnGameLaunch()
     {

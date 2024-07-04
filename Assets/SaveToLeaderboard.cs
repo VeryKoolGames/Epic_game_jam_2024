@@ -9,7 +9,7 @@ public class SaveToLeaderboard : MonoBehaviour
 {
     [SerializeField] private Leaderboard leaderboard;
     [SerializeField] private CompareManager compareManager;
-    [SerializeField] private TextMeshProUGUI playerTextInput;
+    [SerializeField] private TMP_InputField playerTextInput;
     [SerializeField] private SpriteSaver spriteSaver;
     // Start is called before the first frame update
 
@@ -24,6 +24,7 @@ public class SaveToLeaderboard : MonoBehaviour
         int percentage = compareManager.GetAveragePercentage();
         
         leaderboard.AddEntry(new LeaderboardEntry(playerName, percentage, spriteSaver.GetSprites()));
+        playerTextInput.text = "";
     }
 
     private void OnDisable()

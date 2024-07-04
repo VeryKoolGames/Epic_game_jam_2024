@@ -12,7 +12,14 @@ public class ButtonLogic : MonoBehaviour
     [SerializeField] private UnityEvent onClick;
     private bool isLocked = false;
     private bool isSelected = false;
-    
+
+    private void OnEnable()
+    {
+        GetComponent<SpriteRenderer>().sprite = unpressedSprite;
+        isLocked = false;
+        isSelected = false;
+    }
+
     public void LockButton()
     {
         isLocked = true;
